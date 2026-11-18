@@ -1,0 +1,121 @@
+
+===== SLIDE 1 =====
+24CS634- Project Review
+
+===== SLIDE 2 =====
+Introdcution
+2
+TLS Inspector is a comprehensive, full-stack web-based security assessment platform that analyzes any website's SSL/TLS configuration and generates actionable security reports with graded scores.
+The platform employs a tri-architecture approach:
+Modern Reactive Frontend — React 19 + TypeScript + Vite with glassmorphism UI, animated score gauges, and a 10-tab scan results dashboard
+High-Performance Async Backend — Python FastAPI with JWT authentication, background scan orchestration, and 8 specialized scanner modules
+Serverless PostgreSQL — Neon (PostgreSQL) for unified user auth + scan persistence with SQLAlchemy async ORM
+The backend performs an 8-step automated scan pipeline: Certificate Analysis → TLS Version Testing → Cipher Suite Auditing → Chain Validation → Revocation Checking → Vulnerability Scanning → Security Scoring → Recommendation Generation.
+Key Technologies: React 19 (Frontend) | FastAPI + Python (Backend) | PostgreSQL Neon (DB) | Docker Compose (Deployment)
+
+===== SLIDE 3 =====
+Research Gap Identified
+3
+
+===== SLIDE 4 =====
+Objectives & Deliverables
+Objectives:
+Design & implement a production-grade web-based TLS security assessment portal with glassmorphism UI, animated scoring gauges, and responsive design
+Develop an 8-module automated scan engine covering X.509 certificates, TLS protocol versions, cipher suites, revocation status (OCSP/CRL), and certificate chain validation
+Implement 6 vulnerability scanners for Heartbleed (CVE-2014-0160), POODLE (CVE-2014-3566), BEAST (CVE-2011-3389), ROBOT, SWEET32, and CRIME/BREACH
+Build a weighted security scoring algorithm with A+ to F grading and actionable fix recommendations
+Deploy with Docker Compose containerization: Frontend + Backend + PostgreSQL
+Deliverables:
+Full-stack web application (4 pages, 6 components, 10 scan result tabs)
+8 backend scanner modules + 6 vulnerability detectors
+JWT-based authentication with bcrypt password hashing
+PDF & HTML report generator with per-domain security analysis
+Docker Compose deployment configuration
+4
+
+===== SLIDE 5 =====
+Implementation Approach
+Hardware Requirements:
+Development Machine: macOS/Windows, 8GB+ RAM, Intel i5/Ryzen 5+
+Cloud Database: Neon PostgreSQL (serverless)
+Software Requirements:
+Frontend: React 19, TypeScript, Vite, React Router v7, Chart.js
+Backend: Python 3.11+, FastAPI, SQLAlchemy (async), Pydantic v2
+Scanner Engine: cryptography, pyOpenSSL, ssl (stdlib), dnspython, httpx, requests
+Authentication: python-jose (JWT), passlib + bcrypt
+Database: PostgreSQL (Neon) via asyncpg, NullPool for serverless
+Deployment: Docker Compose v3.8, Postgres 16 Alpine
+Architecture:
+Frontend Layer — React + TypeScript SPA
+API Layer — FastAPI REST endpoints (3 routers, 12+ endpoints)
+Scanner Engine Layer — 8 scanner modules + vulnerability orchestrator
+Database Layer — PostgreSQL with 8 relational tables
+5
+
+===== SLIDE 6 =====
+Technical / Scientific Details
+6
+
+===== SLIDE 7 =====
+Update on Previous Review Comments
+7
+
+===== SLIDE 8 =====
+Project Status Update
+Targets for the review period ()
+Actual Status ()
+8
+
+===== SLIDE 9 =====
+Key Outcomes (as on)
+9
+
+===== SLIDE 10 =====
+Major Accomplishments
+8-Module Unified Scan Engine: Successfully orchestrated Certificate Analysis, TLS Version Testing, Cipher Suite Auditing, Chain Validation, Revocation Checking, Vulnerability Scanning, HTTP Headers Analysis, and DNS Security Auditing into a single automated pipeline
+6-Vector Vulnerability Detection: Implemented raw socket-level protocol testing for Heartbleed (CVE-2014-0160), POODLE (CVE-2014-3566), BEAST (CVE-2011-3389), ROBOT (CVE-2017-13099), SWEET32 (CVE-2016-2183), and CRIME/BREACH — providing enterprise-grade vulnerability assessment
+Weighted Security Scoring Algorithm: Built a 5-category weighted scoring system (Certificate 25%, TLS 25%, Cipher 20%, Revocation 15%, Chain 15%) with deduction-based grading that provides nuanced A+ to F assessments
+Full OCSP/CRL Revocation Pipeline: Implemented end-to-end certificate revocation checking — extracting OCSP URLs from AIA extensions, building DER-encoded requests, parsing OCSP responses, and verifying CRL distribution points
+Async Background Scan Architecture: Scans execute as async background tasks using FastAPI BackgroundTasks, enabling non-blocking user experience with live progress polling
+Per-User Scan Isolation: Every scan is cryptographically scoped to the authenticated user via JWT, ensuring strict data isolation — no user can view, modify, or delete another user's scan history
+10
+
+===== SLIDE 11 =====
+Original timeline & Current Status - Project Duration ()
+11
+11
+
+===== SLIDE 12 =====
+Plan for furtherance of Project Outcomes
+12
+
+===== SLIDE 13 =====
+Challenges & Opportunities
+13
+Challenges Encountered:
+TLS Version Testing Complexity: Python's ssl module deprecated TLS 1.0/1.1 constants in newer versions — resolved by using TLSVersion enum with conditional availability checks and graceful fallback
+Serverless Connection Pooling: Neon's serverless PostgreSQL drops idle connections — resolved by adopting NullPool strategy in SQLAlchemy to avoid "connection is closed" errors
+OCSP Responder Variability: Different CAs return OCSP responses in inconsistent formats — resolved with robust error handling and multi-format response parsing
+Timezone-Aware Datetime Conflicts: PostgreSQL enforces timezone-aware timestamps while certificate dates are UTC — resolved by stripping timezone info before persistence using replace(tzinfo=None)
+Background Task Isolation: FastAPI BackgroundTasks don't share SQLAlchemy sessions — resolved by creating independent async engines and session factories within each background task
+Opportunities:
+Platform architecture is extensible to any domain requiring automated security auditing (cloud infrastructure, IoT devices, API endpoints)
+Multi-layer scanning approach can be adapted for regulatory compliance verification (PCI DSS, NIST, ISO 27001)
+Weighted scoring framework can be customized for industry-specific risk assessment (banking, healthcare, government)
+
+===== SLIDE 14 =====
+References
+14
+
+===== SLIDE 15 =====
+Conclusion
+15
+Successfully designed and deployed TLS Inspector — a comprehensive, full-stack web-based certificate and TLS security assessment portal with multi-layer vulnerability detection
+Implemented a tri-architecture system integrating React 19 + TypeScript (Frontend), FastAPI + Python (Backend), and PostgreSQL Neon (Database) into a unified, production-grade platform
+Built an 8-module automated scan pipeline covering X.509 certificate analysis, TLS 1.0–1.3 protocol testing, cipher suite auditing, certificate chain validation, OCSP/CRL revocation checking, vulnerability scanning, HTTP security headers analysis, and DNS security auditing
+Developed 6 vulnerability scanners for enterprise-grade detection of Heartbleed (CVE-2014-0160), POODLE (CVE-2014-3566), BEAST (CVE-2011-3389), ROBOT, SWEET32, and CRIME/BREACH attacks
+Implemented a 5-category weighted security scoring algorithm providing nuanced 0–100 scores with A+ to F grading and actionable fix recommendations
+Platform is containerized via Docker Compose with 3-service architecture (Frontend + Backend + PostgreSQL) for reproducible deployment
+
+===== SLIDE 16 =====
+Thank you

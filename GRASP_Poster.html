@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>GRASP Poster</title>
+    <style>
+        body {
+            background-color: #fdfaf0;
+            /* Light warm beige background */
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            width: 1600px;
+            height: 1100px;
+            color: #111;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #ccc;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .logo-section {
+            width: 250px;
+            text-align: center;
+        }
+
+        .logo-section h1 {
+            color: #8c1515;
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+        }
+
+        .logo-section h3 {
+            color: #8c1515;
+            margin: 0;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .logo-section p {
+            margin: 0;
+            font-size: 0.85em;
+            color: #555;
+            line-height: 1.2;
+        }
+
+        .title-section {
+            text-align: center;
+            flex-grow: 1;
+            padding: 0 20px;
+        }
+
+        .title-section h2 {
+            margin: 0;
+            font-size: 1.8em;
+            color: #333;
+            text-transform: uppercase;
+        }
+
+        .title-section h1 {
+            margin: 10px auto 0 auto;
+            max-width: 80%; /* Forces space on both sides */
+            font-size: 2.8em;
+            word-wrap: break-word;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            line-height: 1.2;
+        }
+
+        .qr-section {
+            width: 150px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .qr-section img {
+            width: 130px;
+            height: 130px;
+            border: 2px solid #000;
+            border-radius: 8px;
+            margin-top: 5px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 26% 46% 26%;
+            gap: 20px;
+            height: calc(100% - 150px);
+        }
+
+        .col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .box {
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .box h3 {
+            text-align: center;
+            margin-top: 0;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .box ul {
+            padding-left: 20px;
+            margin: 0;
+            font-size: 1.15em;
+            line-height: 1.5;
+        }
+
+        .box li {
+            margin-bottom: 12px;
+        }
+
+        .box li strong {
+            color: #333;
+        }
+
+        /* Box Colors matching the design */
+        .obj-box {
+            background-color: #d0e0e3;
+            flex: 1;
+        }
+
+        .cont-box {
+            background-color: #ead1dc;
+            flex: 1;
+        }
+
+        .impl-box {
+            background-color: #fce5cd;
+            flex: 1;
+        }
+
+        .res-box {
+            background-color: #f6b26b;
+            flex: 1.2;
+        }
+
+        /* Deeper orange */
+        .conc-box {
+            background-color: #d9d2e9;
+            flex: 1;
+        }
+
+        /* Middle Section specifics */
+        .mid-box {
+            background-color: transparent;
+            box-shadow: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .mid-box h2 {
+            margin: 0;
+            font-size: 1.6em;
+            background: white;
+            padding: 5px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            background: white;
+            object-fit: contain;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        /* Event Data Lifecycle */
+        .lifecycle {
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .lifecycle h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.3em;
+            border: none;
+        }
+
+        .flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .step-box {
+            text-align: center;
+            font-size: 0.9em;
+            font-weight: bold;
+            width: 14%;
+        }
+
+        .step-num {
+            display: block;
+            margin: 0 auto 5px auto;
+            width: 25px;
+            height: 25px;
+            background: #444;
+            color: white;
+            border-radius: 50%;
+            line-height: 25px;
+        }
+
+        .arrow {
+            font-size: 1.5em;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo-section">
+            <h1>AMRITA</h1>
+            <h3>VISHWA VIDYAPEETHAM</h3>
+            <p>School of Computing<br>Coimbatore Campus, Tamil Nadu<br>Email: harishraj@amrita.edu</p>
+        </div>
+
+        <div class="title-section">
+
+            <h1>GRASP: GRAPH-BASED REAL-TIME AGENTIC SECURITY PLATFORM</h1>
+        </div>
+
+        <div class="qr-section">
+            <div>PROJECT FEEDBACK</div>
+            <!-- Ensure you save the downloaded QR code as qr_code.png in the same directory -->
+            <img src="./qr_code.png" alt="Scan QR Code">
+        </div>
+    </div>
+
+    <!-- Main Grid -->
+    <div class="grid-container">
+
+        <!-- Left Column -->
+        <div class="col">
+            <div class="box obj-box">
+                <h3>Objective</h3>
+                <ul>
+                    <li>Develop an autonomous, Real-time Graph-based security platform.</li>
+                    <li>Decouple high-speed packet ingestion from deep analytical processing for volumetric flood
+                        resilience.</li>
+                    <li>Deploy a parallel swarm of <strong>17 detection agents</strong> (14 ML models, 3 GPU-based
+                        neural networks).</li>
+                    <li>Utilize Bayesian Probabilistic Fusion for decision-making and consensus.</li>
+                    <li>Integrate a local Large Language Model (Llama 3 via Ollama) for explanation and automated
+                        remediation generation.</li>
+                </ul>
+            </div>
+
+            <div class="box cont-box">
+                <h3>Contributions</h3>
+                <div style="text-align: center; margin-bottom: 15px;">
+                    <h4 style="margin: 0; font-size: 1.3em;">Harish S</h4>
+                    <span style="font-size: 0.95em; color: #555;">Roll No: CB.SC.P2CSE25011</span>
+                </div>
+                <ul>
+                    <li><strong>System Architecture:</strong> Designed the 6-layer agentic event processing pipeline.
+                    </li>
+                    <li><strong>AI & ML Engineering:</strong> Built the master training pipeline for 14 models and
+                        Bayesian Fusion Engine.</li>
+                    <li><strong>Data Ingestion:</strong> Developed Scapy packet interception & async queue backpressure.
+                    </li>
+                    <li><strong>Explainability:</strong> Integrated local Llama 3 (Ollama) and SHAP feature analysis.
+                    </li>
+                    <li><strong>Full-Stack UI:</strong> Engineered the React/Vite dashboard with live WebSockets.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Middle Column -->
+        <div class="col" style="gap: 15px;">
+            <div class="mid-box">
+                <h2>High-Level System Architecture</h2>
+                <!-- Using the white architecture diagram we generated earlier! -->
+                <img src="./grasp_architecture_white.png" alt="GRASP Architecture" class="diagram-img"
+                    style="height: 480px;">
+            </div>
+
+            <div class="box impl-box">
+                <h3>Implementation</h3>
+                <ul>
+                    <li><strong>Ingestion & Buffering:</strong> <code>live_capture.py</code> (Scapy),
+                        AttackDetectionMiddleware (FastAPI), <code>asyncio.Queue</code>.</li>
+                    <li><strong>Parallel Swarm Layer:</strong> <code>agent_orchestrator</code>, 14 CPU ML agents, 3 GPU
+                        Deep Learning models (GCN, LSTM, Autoencoder).</li>
+                    <li><strong>AI & Inference Models:</strong> Scikit-Learn Isolation Forests, Random Forests, TF-IDF
+                        Vectorizers.</li>
+                    <li><strong>Explainability & Orchestration:</strong> <code>remediation_engine.py</code>, local Llama
+                        3 (via Ollama) on localhost:11434, SHAP feature extraction.</li>
+                    <li><strong>Visualization Layer:</strong> Zustand State management, React hooks, WebSockets
+                        (sub-50ms latency).</li>
+                </ul>
+            </div>
+
+            <div class="lifecycle">
+                <h3>Event Data Lifecycle</h3>
+                <div class="flow">
+                    <div class="step-box"><span class="step-num">1</span>Raw Packet Capture</div>
+                    <div class="arrow">➔</div>
+                    <div class="step-box"><span class="step-num">2</span>Deduplication Buffer</div>
+                    <div class="arrow">➔</div>
+                    <div class="step-box"><span class="step-num">3</span>Parallel Swarm Processing</div>
+                    <div class="arrow">➔</div>
+                    <div class="step-box"><span class="step-num">4</span>Bayesian Consensus</div>
+                    <div class="arrow">➔</div>
+                    <div class="step-box"><span class="step-num">5</span>LLM Explanation</div>
+                    <div class="arrow">➔</div>
+                    <div class="step-box"><span class="step-num">6</span>UI Broadcast & Action</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col">
+            <div class="box res-box">
+                <h3>Results</h3>
+                <ul>
+                    <li><strong>Detection Accuracy:</strong> 100% detection rate across 12 distinct attack vectors
+                        (153/153 events).</li>
+                    <li><strong>Anomaly Latency:</strong> &lt;15ms average inference time per CPU-based agent.</li>
+                    <li><strong>Consensus Latency:</strong> ~80-250ms average total pipeline processing time for deep
+                        analytical evaluation.</li>
+                    <li><strong>Volumetric Throughput:</strong> Up to 50,000 packets per second during volumetric floods
+                        (buffer limit).</li>
+                    <li><strong>False Positive Rate:</strong> 40-60% reduction in false alarms vs single-model systems.
+                    </li>
+                    <li><strong>Explainability Depth:</strong> Real-time SHAP agent contributions and LLM-generated
+                        incident reports.</li>
+                </ul>
+            </div>
+
+            <div class="box conc-box">
+                <h3>Conclusion</h3>
+                <p style="font-size: 1.15em; line-height: 1.5; margin: 0;">
+                    The GRASP hybrid architecture effectively addresses the challenge of balancing high-volume ingestion
+                    and deep-context analysis in network security. The 17-agent swarm ensures robust detection, and the
+                    integrated local LLM provides necessary human-interpretable explanations and automated response. The
+                    Bayesian decision-making process offers a superior probability-driven consensus mechanism. Overall,
+                    GRASP demonstrates practical feasibility for real-time monitoring and defense of complex, critical
+                    networks (e.g., medical supply chains) using zero-touch, self-contained AI.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

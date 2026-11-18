@@ -1,0 +1,501 @@
+payload,is_attack
+HTTP/1.1 200 OK Content-Type: application/json,0
+NTP request stratum=2 poll=64,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+DNS QUERY A record for api.hospital-supply.com,0
+TCP SYN ACK seq=12345 window=65535,0
+NTP request stratum=2 poll=64,0
+SMTP EHLO mail.supplier.com,0
+NTP request stratum=2 poll=64,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+ICMP Echo Request id=1234 seq=1,0
+ICMP Echo Request id=1234 seq=1,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+ICMP Echo Request id=1234 seq=1,0
+NTP request stratum=2 poll=64,0
+NTP request stratum=2 poll=64,0
+DNS QUERY A record for api.hospital-supply.com,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+ICMP Echo Request id=1234 seq=1,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+NTP request stratum=2 poll=64,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+ICMP Echo Request id=1234 seq=1,0
+SMTP EHLO mail.supplier.com,0
+NTP request stratum=2 poll=64,0
+DNS QUERY A record for api.hospital-supply.com,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+NTP request stratum=2 poll=64,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+NTP request stratum=2 poll=64,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+NTP request stratum=2 poll=64,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+ICMP Echo Request id=1234 seq=1,0
+TCP SYN ACK seq=12345 window=65535,0
+ICMP Echo Request id=1234 seq=1,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+TCP SYN ACK seq=12345 window=65535,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+NTP request stratum=2 poll=64,0
+ICMP Echo Request id=1234 seq=1,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+NTP request stratum=2 poll=64,0
+TCP SYN ACK seq=12345 window=65535,0
+DNS QUERY A record for api.hospital-supply.com,0
+DNS QUERY A record for api.hospital-supply.com,0
+SMTP EHLO mail.supplier.com,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+TCP SYN ACK seq=12345 window=65535,0
+DNS QUERY A record for api.hospital-supply.com,0
+TCP SYN ACK seq=12345 window=65535,0
+ICMP Echo Request id=1234 seq=1,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+TCP SYN ACK seq=12345 window=65535,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+ICMP Echo Request id=1234 seq=1,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+SMTP EHLO mail.supplier.com,0
+ICMP Echo Request id=1234 seq=1,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+ICMP Echo Request id=1234 seq=1,0
+SMTP EHLO mail.supplier.com,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+SMTP EHLO mail.supplier.com,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+NTP request stratum=2 poll=64,0
+TCP SYN ACK seq=12345 window=65535,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+ICMP Echo Request id=1234 seq=1,0
+SMTP EHLO mail.supplier.com,0
+SMTP EHLO mail.supplier.com,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+NTP request stratum=2 poll=64,0
+SMTP EHLO mail.supplier.com,0
+TCP SYN ACK seq=12345 window=65535,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+DNS QUERY A record for api.hospital-supply.com,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TCP SYN ACK seq=12345 window=65535,0
+ICMP Echo Request id=1234 seq=1,0
+DNS QUERY A record for api.hospital-supply.com,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+TCP SYN ACK seq=12345 window=65535,0
+SMTP EHLO mail.supplier.com,0
+ICMP Echo Request id=1234 seq=1,0
+DNS QUERY A record for api.hospital-supply.com,0
+NTP request stratum=2 poll=64,0
+NTP request stratum=2 poll=64,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TCP SYN ACK seq=12345 window=65535,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+ICMP Echo Request id=1234 seq=1,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TCP SYN ACK seq=12345 window=65535,0
+SMTP EHLO mail.supplier.com,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+NTP request stratum=2 poll=64,0
+DNS QUERY A record for api.hospital-supply.com,0
+TCP SYN ACK seq=12345 window=65535,0
+NTP request stratum=2 poll=64,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+DNS QUERY A record for api.hospital-supply.com,0
+NTP request stratum=2 poll=64,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+TCP SYN ACK seq=12345 window=65535,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+ICMP Echo Request id=1234 seq=1,0
+DNS QUERY A record for api.hospital-supply.com,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+ICMP Echo Request id=1234 seq=1,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+DNS QUERY A record for api.hospital-supply.com,0
+TCP SYN ACK seq=12345 window=65535,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+NTP request stratum=2 poll=64,0
+NTP request stratum=2 poll=64,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+ICMP Echo Request id=1234 seq=1,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+DNS QUERY A record for api.hospital-supply.com,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+NTP request stratum=2 poll=64,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+NTP request stratum=2 poll=64,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+SMTP EHLO mail.supplier.com,0
+TCP SYN ACK seq=12345 window=65535,0
+ICMP Echo Request id=1234 seq=1,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+TCP SYN ACK seq=12345 window=65535,0
+DNS QUERY A record for api.hospital-supply.com,0
+DNS QUERY A record for api.hospital-supply.com,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+DNS QUERY A record for api.hospital-supply.com,0
+TCP SYN ACK seq=12345 window=65535,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+NTP request stratum=2 poll=64,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+TCP SYN ACK seq=12345 window=65535,0
+TCP SYN ACK seq=12345 window=65535,0
+ICMP Echo Request id=1234 seq=1,0
+ICMP Echo Request id=1234 seq=1,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+ICMP Echo Request id=1234 seq=1,0
+SMTP EHLO mail.supplier.com,0
+SMTP EHLO mail.supplier.com,0
+NTP request stratum=2 poll=64,0
+TCP SYN ACK seq=12345 window=65535,0
+TCP SYN ACK seq=12345 window=65535,0
+TCP SYN ACK seq=12345 window=65535,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+TCP SYN ACK seq=12345 window=65535,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+NTP request stratum=2 poll=64,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+SMTP EHLO mail.supplier.com,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+ICMP Echo Request id=1234 seq=1,0
+DNS QUERY A record for api.hospital-supply.com,0
+NTP request stratum=2 poll=64,0
+TCP SYN ACK seq=12345 window=65535,0
+SMTP EHLO mail.supplier.com,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TCP SYN ACK seq=12345 window=65535,0
+ICMP Echo Request id=1234 seq=1,0
+NTP request stratum=2 poll=64,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+NTP request stratum=2 poll=64,0
+TCP SYN ACK seq=12345 window=65535,0
+DNS QUERY A record for api.hospital-supply.com,0
+DNS QUERY A record for api.hospital-supply.com,0
+TCP SYN ACK seq=12345 window=65535,0
+TCP SYN ACK seq=12345 window=65535,0
+NTP request stratum=2 poll=64,0
+DNS QUERY A record for api.hospital-supply.com,0
+SMTP EHLO mail.supplier.com,0
+NTP request stratum=2 poll=64,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+NTP request stratum=2 poll=64,0
+SMTP EHLO mail.supplier.com,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+NTP request stratum=2 poll=64,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+DNS QUERY A record for api.hospital-supply.com,0
+ICMP Echo Request id=1234 seq=1,0
+DNS QUERY A record for api.hospital-supply.com,0
+ICMP Echo Request id=1234 seq=1,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TCP SYN ACK seq=12345 window=65535,0
+NTP request stratum=2 poll=64,0
+SMTP EHLO mail.supplier.com,0
+SMTP EHLO mail.supplier.com,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+SMTP EHLO mail.supplier.com,0
+ICMP Echo Request id=1234 seq=1,0
+ICMP Echo Request id=1234 seq=1,0
+DNS QUERY A record for api.hospital-supply.com,0
+SMTP EHLO mail.supplier.com,0
+DNS QUERY A record for api.hospital-supply.com,0
+TCP SYN ACK seq=12345 window=65535,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+DNS QUERY A record for api.hospital-supply.com,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+DNS QUERY A record for api.hospital-supply.com,0
+TCP SYN ACK seq=12345 window=65535,0
+DNS QUERY A record for api.hospital-supply.com,0
+NTP request stratum=2 poll=64,0
+TCP SYN ACK seq=12345 window=65535,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TCP SYN ACK seq=12345 window=65535,0
+ICMP Echo Request id=1234 seq=1,0
+ICMP Echo Request id=1234 seq=1,0
+TCP SYN ACK seq=12345 window=65535,0
+NTP request stratum=2 poll=64,0
+NTP request stratum=2 poll=64,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+ICMP Echo Request id=1234 seq=1,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+SMTP EHLO mail.supplier.com,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+SMTP EHLO mail.supplier.com,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+NTP request stratum=2 poll=64,0
+DNS QUERY A record for api.hospital-supply.com,0
+DNS QUERY A record for api.hospital-supply.com,0
+SMTP EHLO mail.supplier.com,0
+ICMP Echo Request id=1234 seq=1,0
+NTP request stratum=2 poll=64,0
+DNS QUERY A record for api.hospital-supply.com,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+DNS QUERY A record for api.hospital-supply.com,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+TCP SYN ACK seq=12345 window=65535,0
+NTP request stratum=2 poll=64,0
+NTP request stratum=2 poll=64,0
+SMTP EHLO mail.supplier.com,0
+NTP request stratum=2 poll=64,0
+DNS QUERY A record for api.hospital-supply.com,0
+ICMP Echo Request id=1234 seq=1,0
+TCP SYN ACK seq=12345 window=65535,0
+SMTP EHLO mail.supplier.com,0
+NTP request stratum=2 poll=64,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+SMTP EHLO mail.supplier.com,0
+TCP SYN ACK seq=12345 window=65535,0
+SMTP EHLO mail.supplier.com,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+ICMP Echo Request id=1234 seq=1,0
+ICMP Echo Request id=1234 seq=1,0
+ICMP Echo Request id=1234 seq=1,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+NTP request stratum=2 poll=64,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+TCP SYN ACK seq=12345 window=65535,0
+TCP SYN ACK seq=12345 window=65535,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+TCP SYN ACK seq=12345 window=65535,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+ICMP Echo Request id=1234 seq=1,0
+DNS QUERY A record for api.hospital-supply.com,0
+TCP SYN ACK seq=12345 window=65535,0
+DNS QUERY A record for api.hospital-supply.com,0
+ICMP Echo Request id=1234 seq=1,0
+TCP SYN ACK seq=12345 window=65535,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TCP SYN ACK seq=12345 window=65535,0
+DNS QUERY A record for api.hospital-supply.com,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+SMTP EHLO mail.supplier.com,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+SMTP EHLO mail.supplier.com,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+TCP SYN ACK seq=12345 window=65535,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TCP SYN ACK seq=12345 window=65535,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+DNS QUERY A record for api.hospital-supply.com,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+DNS QUERY A record for api.hospital-supply.com,0
+ICMP Echo Request id=1234 seq=1,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TCP SYN ACK seq=12345 window=65535,0
+SMTP EHLO mail.supplier.com,0
+NTP request stratum=2 poll=64,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TCP SYN ACK seq=12345 window=65535,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+DNS QUERY A record for api.hospital-supply.com,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+SMTP EHLO mail.supplier.com,0
+NTP request stratum=2 poll=64,0
+TCP SYN ACK seq=12345 window=65535,0
+SMTP EHLO mail.supplier.com,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+SMTP EHLO mail.supplier.com,0
+SMTP EHLO mail.supplier.com,0
+NTP request stratum=2 poll=64,0
+DNS QUERY A record for api.hospital-supply.com,0
+DNS QUERY A record for api.hospital-supply.com,0
+DNS QUERY A record for api.hospital-supply.com,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+NTP request stratum=2 poll=64,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+NTP request stratum=2 poll=64,0
+TCP SYN ACK seq=12345 window=65535,0
+TCP SYN ACK seq=12345 window=65535,0
+DNS QUERY A record for api.hospital-supply.com,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+ICMP Echo Request id=1234 seq=1,0
+NTP request stratum=2 poll=64,0
+TCP SYN ACK seq=12345 window=65535,0
+NTP request stratum=2 poll=64,0
+TCP SYN ACK seq=12345 window=65535,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+SMTP EHLO mail.supplier.com,0
+TCP SYN ACK seq=12345 window=65535,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+NTP request stratum=2 poll=64,0
+ICMP Echo Request id=1234 seq=1,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+DNS QUERY A record for api.hospital-supply.com,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+SMTP EHLO mail.supplier.com,0
+DNS QUERY A record for api.hospital-supply.com,0
+DNS QUERY A record for api.hospital-supply.com,0
+DNS QUERY A record for api.hospital-supply.com,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+ICMP Echo Request id=1234 seq=1,0
+TCP SYN ACK seq=12345 window=65535,0
+NTP request stratum=2 poll=64,0
+TCP SYN ACK seq=12345 window=65535,0
+SMTP EHLO mail.supplier.com,0
+ICMP Echo Request id=1234 seq=1,0
+TCP SYN ACK seq=12345 window=65535,0
+ICMP Echo Request id=1234 seq=1,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+SMTP EHLO mail.supplier.com,0
+NTP request stratum=2 poll=64,0
+DNS QUERY A record for api.hospital-supply.com,0
+TCP SYN ACK seq=12345 window=65535,0
+SMTP EHLO mail.supplier.com,0
+NTP request stratum=2 poll=64,0
+SMTP EHLO mail.supplier.com,0
+NTP request stratum=2 poll=64,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+NTP request stratum=2 poll=64,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+NTP request stratum=2 poll=64,0
+SMTP EHLO mail.supplier.com,0
+NTP request stratum=2 poll=64,0
+ICMP Echo Request id=1234 seq=1,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+NTP request stratum=2 poll=64,0
+DNS QUERY A record for api.hospital-supply.com,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+DNS QUERY A record for api.hospital-supply.com,0
+SMTP EHLO mail.supplier.com,0
+DNS QUERY A record for api.hospital-supply.com,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+SMTP EHLO mail.supplier.com,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+NTP request stratum=2 poll=64,0
+DNS QUERY A record for api.hospital-supply.com,0
+TCP SYN ACK seq=12345 window=65535,0
+NTP request stratum=2 poll=64,0
+ICMP Echo Request id=1234 seq=1,0
+SMTP EHLO mail.supplier.com,0
+TCP SYN ACK seq=12345 window=65535,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+ICMP Echo Request id=1234 seq=1,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+DNS QUERY A record for api.hospital-supply.com,0
+ICMP Echo Request id=1234 seq=1,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+DNS QUERY A record for api.hospital-supply.com,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+NTP request stratum=2 poll=64,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+DNS QUERY A record for api.hospital-supply.com,0
+TCP SYN ACK seq=12345 window=65535,0
+DNS QUERY A record for api.hospital-supply.com,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TCP SYN ACK seq=12345 window=65535,0
+TCP SYN ACK seq=12345 window=65535,0
+NTP request stratum=2 poll=64,0
+DNS QUERY A record for api.hospital-supply.com,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+NTP request stratum=2 poll=64,0
+SMTP EHLO mail.supplier.com,0
+DNS QUERY A record for api.hospital-supply.com,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+TCP SYN ACK seq=12345 window=65535,0
+ICMP Echo Request id=1234 seq=1,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+SMTP EHLO mail.supplier.com,0
+TCP SYN ACK seq=12345 window=65535,0
+ICMP Echo Request id=1234 seq=1,0
+DNS QUERY A record for api.hospital-supply.com,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+DNS QUERY A record for api.hospital-supply.com,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+ICMP Echo Request id=1234 seq=1,0
+TCP SYN ACK seq=12345 window=65535,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+NTP request stratum=2 poll=64,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+NTP request stratum=2 poll=64,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+NTP request stratum=2 poll=64,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+ICMP Echo Request id=1234 seq=1,0
+DNS QUERY A record for api.hospital-supply.com,0
+TCP SYN ACK seq=12345 window=65535,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+TCP SYN ACK seq=12345 window=65535,0
+SMTP EHLO mail.supplier.com,0
+NTP request stratum=2 poll=64,0
+DNS QUERY A record for api.hospital-supply.com,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+NTP request stratum=2 poll=64,0
+DNS QUERY A record for api.hospital-supply.com,0
+DNS QUERY A record for api.hospital-supply.com,0
+SMTP EHLO mail.supplier.com,0
+SMTP EHLO mail.supplier.com,0
+ICMP Echo Request id=1234 seq=1,0
+DNS QUERY A record for api.hospital-supply.com,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+NTP request stratum=2 poll=64,0
+TLS 1.3 Handshake ClientHello cipher=AES_256_GCM,0
+HTTP GET /api/health HTTP/1.1 Host: grasp.local,0
+DNS QUERY A record for api.hospital-supply.com,0
+NTP request stratum=2 poll=64,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+HTTP/1.1 200 OK Content-Type: application/json,0
+NTP request stratum=2 poll=64,0
+NTP request stratum=2 poll=64,0

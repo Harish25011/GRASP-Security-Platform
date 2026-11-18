@@ -1,0 +1,336 @@
+
+=== TABLE 1 ===
+Research Title
+GRASP: Graph-based Real-time Agentic Security Platform — Explainable Multi-Vector Anomaly Detection using 15-Agent Parallel Swarm with GPU-Accelerated GNN for Medical Supply Chain Cybersecurity
+
+=== TABLE 2 ===
+Component | Technology | Purpose
+Backend API | Python 3.11 + FastAPI | Serves all data, runs agent swarm, handles WebSockets
+AI / GNN | PyTorch + PyTorch Geometric (CUDA) | GCN on RTX 4060 — ~2ms inference
+15 Parallel Agents | ThreadPoolExecutor + asyncio | All agents fire simultaneously on each event
+Graph Engine | NetworkX + frozen snapshot | Supply chain graph, thread-safe parallel reads
+Frontend | React 18 + TailwindCSS + Vite | Dynamic SPA — live updates, no page reloads
+Graph Visualization | Cytoscape.js | Interactive supply chain network map
+Charts | Recharts + Chart.js | Agent scores, risk timeline, attack statistics
+Real-time Updates | WebSocket (FastAPI + React) | Live event stream pushed from backend to UI
+LLM Explainer | Claude API / GPT-4 API | Plain-English anomaly reports per flagged node
+Adversarial Tests | DeepRobust (CUDA) | Poisoning + evasion attack robustness tests
+
+=== TABLE 3 ===
+Stage | Module | What happens | Where
+1 | Dataset Loader | Load CICIDS2017/BETH CSV or accept live event stream | backend/data/
+2 | Graph Builder | Map IPs/entities to NetworkX nodes, transactions to edges | backend/services/graph_builder.py
+3 | Snapshot Freeze | Deep-copy current graph — all agents read this frozen copy | backend/services/aggregator.py
+4 | Parallel Dispatch | ThreadPoolExecutor dispatches all 15 agents simultaneously | backend/services/aggregator.py
+5 | GPU Agents | GCN, Zero-day, Temporal/APT run on RTX 4060 via CUDA | backend/agents/gpu/
+6 | CPU Agents | 12 lightweight agents run on i7 threads in parallel | backend/agents/cpu/
+7 | Score Collection | Aggregator awaits all 15 scores (timeout=100ms per agent) | backend/services/aggregator.py
+8 | MLP Decision | 18-input adaptive MLP on GPU outputs risk score [0,1] | backend/models/meta_classifier.py
+9 | Risk Router | risk > 0.7 → Safe Box quarantine  |  else → normal flow | backend/services/decision_engine.py
+10 | Explainability | GNNExplainer + LLM API generates human report for anomalies | backend/services/llm_explainer.py
+11 | WebSocket Push | All results pushed live to connected React clients | backend/api/websocket.py
+12 | React Dashboard | UI updates graph, agent bars, logs in real time | frontend/pages/
+
+=== TABLE 4 ===
+Layer 1 — Data Layer
+Raw events → Dataset Loader → Graph Builder → Feature Engineering → Frozen Snapshot
+
+=== TABLE 5 ===
+Layer 2 — Parallel Agent Swarm (15 agents, all simultaneous)
+CPU Group (i7, 12 threads):  Signature · Spike · Behavior · Port Scan · DDoS · SQLi/XSS · Brute Force · MITM · Supply Inject · Priv. Escalation · C2/Beaconing · Exfiltration/Ransomware · Lateral Move
+GPU Group (RTX 4060 CUDA): Graph GCN · Zero-day · Temporal/APT
+
+=== TABLE 6 ===
+Layer 3 — Specialist Modules (post-aggregation)
+Meta-agent → Temporal/APT escalation → LLM Reasoning Agent
+
+=== TABLE 7 ===
+Layer 4 — Decision + Output
+Adaptive MLP (GPU) → Risk Router → Safe Box / Normal Flow → GNNExplainer → LLM Report → WebSocket → React Dashboard
+
+=== TABLE 8 ===
+Agent | Runs On | Why | Expected Time
+Graph GCN (GraphSAGE) | RTX 4060 CUDA | Matrix ops — GPU 40x faster than CPU | ~2ms
+Zero-day (GCN embedding) | RTX 4060 CUDA | Embedding similarity needs GPU tensors | ~2ms
+Temporal / APT | RTX 4060 CUDA | 7-day graph similarity — large tensor ops | ~5ms
+Adaptive MLP | RTX 4060 CUDA | Small net — sub-millisecond on GPU | <1ms
+Signature Agent | i7 thread | Regex — pure CPU string ops | ~1ms
+Spike Agent | i7 thread | Z-score math — lightweight NumPy | ~3ms
+Behavior Agent | i7 thread | Isolation Forest — sklearn CPU | ~15ms
+Port Scan | i7 thread | Counter + threshold — trivial | ~1ms
+DDoS | i7 thread | In-degree counter — trivial | ~1ms
+SQLi / XSS | i7 thread | Regex + Shannon entropy | ~2ms
+Brute Force | i7 thread | Auth failure counter | ~1ms
+Lateral Movement | i7 thread | BFS traversal on frozen graph | ~10ms
+Exfiltration | i7 thread | Ratio comparison — NumPy | ~2ms
+Ransomware Spread | i7 thread | Event sequence matching | ~5ms
+MITM | i7 thread | Path comparison — NetworkX | ~8ms
+Supply Chain Inject | i7 thread | Edge diff on graph snapshot | ~3ms
+Priv. Escalation | i7 thread | RBAC dict lookup | ~1ms
+C2 / Beaconing | i7 thread | FFT on event time-series | ~12ms
+
+=== TABLE 9 ===
+Total parallel detection time on your hardware
+All agents fire at once. Slowest CPU agent = ~15ms (Behavior Agent). GPU agents = ~5ms max. Total = ~15-20ms per event including aggregation. The old sequential approach would take ~80ms+ on this same hardware. Your GPU drops the GCN from 80ms to 2ms alone.
+
+=== TABLE 10 ===
+Full project layout — built from scratch
+grasp/
+├── backend/
+│   ├── main.py                         # FastAPI app entry point
+│   ├── requirements.txt
+│   ├── api/
+│   │   ├── routes.py                   # All REST endpoints
+│   │   └── websocket.py                # WebSocket event stream
+│   ├── agents/
+│   │   ├── base_agent.py               # Abstract base class for all agents
+│   │   ├── cpu/                        # 12 CPU agents
+│   │   │   ├── signature_agent.py
+│   │   │   ├── spike_agent.py
+│   │   │   ├── behavior_agent.py       # Isolation Forest + sliding window
+│   │   │   ├── port_scan_agent.py
+│   │   │   ├── ddos_agent.py
+│   │   │   ├── sqli_xss_agent.py
+│   │   │   ├── bruteforce_agent.py
+│   │   │   ├── lateral_movement_agent.py
+│   │   │   ├── exfiltration_agent.py
+│   │   │   ├── ransomware_agent.py
+│   │   │   ├── mitm_agent.py
+│   │   │   ├── supply_inject_agent.py
+│   │   │   ├── priv_escalation_agent.py
+│   │   │   └── c2_beacon_agent.py
+│   │   ├── gpu/                        # 3 GPU agents (CUDA)
+│   │   │   ├── graph_gcn_agent.py
+│   │   │   ├── zero_day_agent.py
+│   │   │   └── temporal_apt_agent.py
+│   │   └── specialist/
+│   │       ├── meta_agent.py
+│   │       └── llm_reasoning_agent.py
+│   ├── services/
+│   │   ├── graph_builder.py            # NetworkX graph construction
+│   │   ├── feature_engineering.py      # Node/edge feature vectors
+│   │   ├── aggregator.py               # Parallel dispatch + snapshot freeze
+│   │   ├── decision_engine.py          # Risk router
+│   │   ├── safe_box.py                 # Quarantine system
+│   │   └── llm_explainer.py            # GNNExplainer + LLM API call
+│   ├── models/
+│   │   ├── gcn_model.py                # GraphSAGE definition
+│   │   ├── meta_classifier.py          # 18-input adaptive MLP
+│   │   └── explainer.py                # GNNExplainer wrapper
+│   ├── adversarial/
+│   │   ├── poisoning_test.py
+│   │   ├── evasion_test.py
+│   │   └── robustness_report.py
+│   └── data/
+│       └── dataset_loader.py
+│
+└── frontend/                           # React 18 + Vite + TailwindCSS
+    ├── index.html
+    ├── vite.config.js
+    ├── tailwind.config.js
+    ├── package.json
+    └── src/
+        ├── main.jsx                    # React entry point
+        ├── App.jsx                     # Router + layout
+        ├── hooks/
+        │   ├── useWebSocket.js         # Live event stream hook
+        │   └── useApi.js               # REST API hook
+        ├── store/
+        │   └── graphStore.js           # Zustand global state
+        ├── pages/
+        │   ├── Dashboard.jsx           # KPI cards + risk timeline
+        │   ├── GraphView.jsx           # Cytoscape supply chain map
+        │   ├── RealTime.jsx            # Live event log + simulate button
+        │   ├── Anomalies.jsx           # Flagged nodes + agent score bars
+        │   ├── AgentStatus.jsx         # Live 15-agent score dashboard
+        │   ├── Explainability.jsx      # GNNExplainer + LLM report
+        │   ├── SafeBox.jsx             # Quarantined nodes
+        │   ├── AttackSim.jsx           # Inject any of 15 attack types
+        │   └── Robustness.jsx          # Adversarial test results
+        └── components/
+            ├── Sidebar.jsx
+            ├── Navbar.jsx
+            ├── AgentScoreBar.jsx        # Mini bar for each agent score
+            ├── RiskGauge.jsx            # Circular risk score display
+            ├── NodeCard.jsx             # Node detail popup
+            └── LiveLogPanel.jsx         # Scrolling event log
+
+=== TABLE 11 ===
+Method | Endpoint | Description | Returns
+POST | /api/load | Load dataset, build graph | Graph stats JSON
+GET | /api/graph | Full graph for Cytoscape | Nodes + edges JSON
+GET | /api/analyze | Run 15-agent parallel swarm on current graph | All 15 scores + risk + anomalies
+POST | /api/simulate | Inject one real-time event | Agent scores for that event
+POST | /api/attack | Inject named attack type | Attack result + agent scores
+GET | /api/safe_box | Get quarantined nodes | Node list + reasons
+POST | /api/safe_box/release/{id} | Release node from quarantine | Updated node status
+GET | /api/agents/status | Live scores for all 15 agents | Score vector + latency per agent
+GET | /api/explain/{node_id} | GNNExplainer + LLM report | Subgraph + feature importance + text
+POST | /api/adversarial/poison | Run Mettack graph poisoning | Before/after accuracy
+POST | /api/adversarial/evade | Run PGD feature evasion | FNR change
+GET | /api/adversarial/report | Full robustness report | JSON report
+POST | /api/classifier/train | Retrain adaptive MLP | New accuracy metrics
+GET | /api/metrics | Accuracy, F1, AUC-ROC, latency | Evaluation metrics JSON
+
+=== TABLE 12 ===
+WS /ws/events — real-time event stream
+Connection: frontend connects on load, stays open
+Server pushes: new events, agent score updates, anomaly alerts, safe box changes
+Message format: { type: 'event'|'anomaly'|'safebox'|'agent_update', payload: {...} }
+Used by: RealTime.jsx, Dashboard.jsx, AgentStatus.jsx, GraphView.jsx
+
+=== TABLE 13 ===
+Page | Route | Key Components | Live Data Source
+Dashboard | / | KPI cards, risk timeline chart, recent anomalies list | WebSocket + /api/metrics
+Graph View | /graph | Cytoscape interactive supply chain map, node color by risk, click for details | WebSocket graph updates
+Real-Time | /realtime | Live scrolling event log, Simulate button, agent firing indicators | WebSocket /ws/events
+Agent Status | /agents | 15 live score bars, per-agent latency, firing history | WebSocket agent_update
+Anomalies | /anomalies | Table of flagged nodes, 15-agent score breakdown per node | GET /api/analyze
+Explainability | /explain | Node selector, GNNExplainer subgraph, LLM plain-English report | GET /api/explain/:id
+Attack Sim | /attacks | 15 attack type buttons, injection result, graph before/after | POST /api/attack
+Safe Box | /safebox | Quarantined node cards, release button, temporal history graph | GET /api/safe_box
+Robustness | /robustness | Before/after accuracy charts, per-agent robustness, F1 comparison | GET /api/adversarial/report
+
+=== TABLE 14 ===
+Node Risk Score | Color | Border | Label
+0.0 – 0.3 (safe) | Green (#27AE60) | Thin gray | Node ID + type
+0.3 – 0.6 (watch) | Amber (#F39C12) | Medium amber | Node ID + risk %
+0.6 – 0.7 (suspicious) | Orange (#E67E22) | Thick orange | Node ID + top agent
+0.7 – 1.0 (anomaly) | Red (#E74C3C) | Thick red + pulse | Node ID + ALERT
+Quarantined | Dark red + X | Double border | QUARANTINED
+
+=== TABLE 15 ===
+Phase overview
+Phase 1  (Weeks 1–2):   Project setup, environment, dataset, base graph
+Phase 2  (Weeks 3–5):   GCN model, v1 agents, parallel aggregator
+Phase 3  (Weeks 6–8):   12 CPU agents + GPU agents
+Phase 4  (Weeks 9–10):  Specialist layer, adaptive MLP, decision engine
+Phase 5  (Weeks 11–12): Explainability + adversarial robustness
+Phase 6  (Weeks 13–15): Full React frontend — all 9 pages
+Phase 7  (Weeks 16–17): Integration, WebSocket, end-to-end testing
+Phase 8  (Week 18):     Evaluation, report, demo video
+
+=== TABLE 16 ===
+Day | Task | Output
+Day 1 | Create GitHub repo. Set up Python 3.11 venv. Install: fastapi uvicorn torch torchvision torch-geometric networkx scikit-learn deeprobust | Working venv + requirements.txt
+Day 2 | Verify CUDA: python -c 'import torch; print(torch.cuda.is_available())' — must print True. Install correct CUDA toolkit for RTX 4060. | CUDA confirmed working
+Day 3 | Download CICIDS2017 dataset. Explore with pandas. Understand columns: src_ip, dst_ip, protocol, bytes, label. | Data exploration notebook
+Day 4 | Write dataset_loader.py — load CSV, clean nulls, normalize features, map attack labels. | Clean dataset loading
+Day 5 | Write graph_builder.py — NetworkX DiGraph, nodes=IPs, edges=connections, node attrs=feature vector. | Graph builds from CSV
+Day 6 | Write feature_engineering.py — compute degree, betweenness centrality, transaction volume, timing deltas. | Feature vectors on all nodes
+Day 7 | Write /api/load and /api/graph endpoints. Test with Postman. Verify graph JSON structure. | 2 working API endpoints
+Day 8-10 | Write base_agent.py abstract class. All agents inherit: def score(graph_snapshot) -> float. Add threading.Lock for stateful agents. | Agent base class done
+
+=== TABLE 17 ===
+Day | Task | Output
+Day 11 | Write gcn_model.py — GraphSAGE 2-layer, move to CUDA: model.to('cuda'). Add .to(device) on all data tensors. | GCN on RTX 4060
+Day 12-13 | Train GCN on CICIDS2017 graph. Save checkpoint. Verify inference: forward pass < 3ms on GPU. | Trained GCN checkpoint
+Day 14 | Write graph_gcn_agent.py — loads GCN, runs inference on frozen snapshot, returns per-node anomaly score. | GPU GCN agent working
+Day 15 | Write signature_agent.py — regex patterns.json for known attacks. Returns 1.0 on match, 0.0 else. | Signature agent tested
+Day 16 | Write spike_agent.py — scipy Z-score on degree time-series. Threshold = 3 sigma. | Spike agent tested
+Day 17 | Write behavior_agent.py — IsolationForest on 50-event sliding window deque. Thread-safe with Lock. | Behavior agent tested
+Day 18-19 | Write aggregator.py — freeze snapshot, ThreadPoolExecutor(max_workers=15), dispatch all agents, timeout=100ms. | Parallel aggregator running
+Day 20-21 | Write meta_classifier.py — 18-input MLP on CUDA. Train on agent outputs. /api/classifier/train endpoint. | Adaptive MLP trained
+Day 22 | Write decision_engine.py — risk > 0.7 quarantine. Write safe_box.py — quarantine dict + /api/safe_box. | Decision pipeline end-to-end
+Day 23-25 | Integration test Phase 2 — load dataset, build graph, run parallel swarm, verify all scores, verify quarantine. | Phase 2 integration passing
+
+=== TABLE 18 ===
+Days | Agents to Build | Key Implementation Detail
+Day 26-27 | port_scan_agent.py + ddos_agent.py | Port scan: count distinct targets per source in 10s window. DDoS: in-degree > mean+3*std.
+Day 28 | sqli_xss_agent.py | Regex for SQLi/XSS payloads in transaction metadata + Shannon entropy scoring on payload field.
+Day 29 | bruteforce_agent.py | Counter with exponential decay per source node. Threshold: 10 failed auths/min fires 1.0.
+Day 30-31 | lateral_movement_agent.py | BFS from recently flagged nodes. Detect expansion to >3 new nodes within 60s. Score by hop count.
+Day 32 | exfiltration_agent.py | Compare outbound/inbound byte ratio vs 30-day rolling baseline per node. >5x ratio = 1.0.
+Day 33 | ransomware_agent.py | Event sequence match: detect cascading 'file_lock' events on >3 nodes within 60s.
+Day 34 | mitm_agent.py | Compare actual routing path vs NetworkX shortest_path. Any unexpected intermediate node = flag.
+Day 35 | supply_inject_agent.py | Monitor edge diffs between graph snapshots. New edge to trusted node from unverified source = flag.
+Day 36 | priv_escalation_agent.py | RBAC baseline dict per node type. Edge to out-of-role resource = 1.0.
+Day 37 | c2_beacon_agent.py | FFT on outbound event time-series per node. Strong periodicity peak = beaconing.
+Day 38-39 | zero_day_agent.py (GPU) | Cosine distance in GCN embedding space from anomaly cluster centroid. CUDA tensor ops.
+Day 40-42 | temporal_apt_agent.py (GPU) | 7-day event graph per node stored as sparse tensor. Graph similarity to APT kill chain patterns.
+
+=== TABLE 19 ===
+Days | Task | Output
+Day 43-44 | Write meta_agent.py — monitors all 15 agent scores. If 3+ agents in same category spike simultaneously, escalates to specialist analysis. | Meta-agent coordinating swarm
+Day 45-46 | Write llm_reasoning_agent.py — builds prompt from all 18 scores + graph context, calls LLM API, returns threat classification. | LLM reasoning agent
+Day 47 | Upgrade meta_classifier.py — input=18 (15 agents + 3 specialist), hidden=[64,32], CUDA. Retrain. | Upgraded MLP on GPU
+Day 48-50 | Wire full pipeline: all 15 agents → aggregator → meta_agent → specialist → MLP → decision → safe_box. End-to-end test all 15 attack types. | Complete backend working
+
+=== TABLE 20 ===
+Days | Task | Output
+Day 51-52 | Write explainer.py — GNNExplainer wrapper, returns top-k subgraph mask + feature importance per flagged node. | Subgraph explanations
+Day 53 | Write llm_explainer.py — combine GNNExplainer output + agent scores into LLM prompt. Return 3-sentence report. | Plain-English anomaly reports
+Day 54 | Expose /api/explain/{node_id} endpoint. Test with Postman. | Explainability API working
+Day 55-56 | Write poisoning_test.py — DeepRobust Mettack (5% budget). Measure accuracy drop. | Poisoning test results logged
+Day 57 | Write evasion_test.py — PGD feature perturbation (epsilon=0.1). Measure FNR increase. | Evasion test results logged
+Day 58 | Write robustness_report.py — per-agent accuracy before/after each attack type. | Full robustness JSON report
+Day 59-60 | Expose adversarial endpoints. Write /api/adversarial/report. Integration test. | Adversarial API complete
+
+=== TABLE 21 ===
+Days | Task | Output
+Day 61 | npm create vite@latest frontend -- --template react. Install: tailwindcss cytoscape recharts chart.js zustand react-router-dom axios. | React project scaffolded
+Day 62 | Write App.jsx — React Router setup, all 9 routes. Write Sidebar.jsx + Navbar.jsx + layout shell. | App shell with navigation
+Day 63 | Write useWebSocket.js hook — connects to ws://localhost:8000/ws/events, dispatches to Zustand store. | Live WebSocket hook
+Day 64 | Write graphStore.js — Zustand store for graph, anomalies, agentScores, safeBox, eventLog. | Global state management
+Day 65-66 | Build Dashboard.jsx — 4 KPI cards (Total Nodes, Active Alerts, Safe Box Count, Avg Risk), risk timeline Recharts line chart, recent anomalies list. | Dashboard page live
+Day 67-68 | Build GraphView.jsx — Cytoscape.js supply chain graph. Node color = risk level (green/amber/orange/red). Click node for NodeCard popup with all agent scores. | Interactive graph working
+Day 69 | Build RealTime.jsx — live scrolling LiveLogPanel, Simulate Event button calls POST /api/simulate, agent firing indicators animate on each event. | Real-time page live
+Day 70 | Build AgentStatus.jsx — 15 AgentScoreBar components, each with live score + latency. Bars animate on WebSocket update. | Agent status dashboard
+Day 71-72 | Build Anomalies.jsx — table of flagged nodes. Each row expands to show all 15 agent scores as bar chart, timestamp, attack type label. | Anomalies page live
+Day 73 | Build Explainability.jsx — node ID search, calls /api/explain/:id, renders GNNExplainer subgraph (Cytoscape) + LLM text report. | Explainability page live
+Day 74 | Build AttackSim.jsx — 15 styled buttons (one per attack type), each calls POST /api/attack. Show before/after graph side by side. | Attack simulation page
+Day 75 | Build SafeBox.jsx — quarantined node cards with 7-day event sparkline, release button calls POST /api/safe_box/release/:id. | Safe Box page live
+Day 76 | Build Robustness.jsx — Chart.js bar charts comparing accuracy before/after poisoning + evasion. Per-agent F1 table. | Robustness page live
+
+=== TABLE 22 ===
+Days | Task | Output
+Day 77-78 | Write websocket.py — FastAPI WebSocket manager. On each backend event: broadcast to all connected clients. Message types: event, anomaly, agent_update, safebox. | WebSocket server live
+Day 79 | Connect all frontend pages to live WebSocket. Test: inject event in backend → verify all 4 relevant UI pages update within 50ms. | Full real-time UI confirmed
+Day 80 | CORS setup in FastAPI. Test full stack: React on :5173, FastAPI on :8000. All API calls working. | Full-stack working locally
+Day 81-82 | End-to-end attack scenario test: load CICIDS2017 → inject each of 15 attack types → verify correct agent fires → anomaly appears on UI → safe box populates → explainability generates report. | All 15 attack types verified
+Day 83-84 | Performance test: inject 100 events/second. Verify latency stays <20ms. Monitor GPU utilization (nvidia-smi). Check for memory leaks. | Performance benchmark results
+Day 85 | Bug fixes from testing. Polish UI — loading states, error boundaries, empty states for all pages. | Production-quality UI
+
+=== TABLE 23 ===
+Days | Task | Output
+Day 86 | Run full evaluation on CICIDS2017: record Accuracy, Precision, Recall, F1, AUC-ROC for overall system and per attack type. | Evaluation table
+Day 87 | Run ablation study: v1 (4 agents sequential) vs v2 (4 agents parallel) vs v3 (15 agents parallel + GPU). Record all metrics. | Ablation study results
+Day 88 | Run adversarial evaluation: accuracy under poisoning, FNR under evasion. Document per-agent robustness. | Adversarial results table
+Day 89 | Measure latency: sequential vs parallel CPU vs parallel GPU. Create comparison chart. | Latency benchmark chart
+Day 90 | Write research paper / thesis. Sections: Abstract, Introduction, Related Work, Architecture, Experiments, Results, Conclusion. | Paper draft complete
+Day 91 | Create presentation slides (15 slides). Rehearse. | Slides ready
+Day 92 | Record 10-minute demo video: show live dashboard, inject attack, watch detection, click explainability report, show robustness results. | Demo video recorded
+
+=== TABLE 24 ===
+Time Slot | Activity | Notes
+9:00 – 11:00 AM | Core coding — today's planned module | No phone. Deep work. Close everything else.
+11:00 – 12:00 PM | Unit tests — pytest for what you just built | Every function needs at least one test
+1:00 – 2:30 PM | Integration — connect module to pipeline | Test via Postman or curl first, then UI
+2:30 – 3:30 PM | Code cleanup + comments + git commit | Commit daily even if partial
+3:30 – 4:30 PM | Read one paper related to today's work | See reading list below
+4:30 – 5:00 PM | Update README and document today's progress | Keeps your report writing easy later
+
+=== TABLE 25 ===
+Metric | Target | Measurement Tool
+Overall detection accuracy | ≥ 93% on CICIDS2017 | sklearn accuracy_score
+Macro F1 score | ≥ 90% | sklearn f1_score(average='macro')
+AUC-ROC | ≥ 0.96 | sklearn roc_auc_score
+False Negative Rate | < 5% | (FN / (FN+TP)) * 100
+Detection latency (parallel GPU) | < 20ms per event | time.perf_counter()
+Detection latency (sequential baseline) | ~450ms — baseline comparison | same measurement
+GPU utilization during detection | < 30% — shows headroom | nvidia-smi
+Memory usage (VRAM) | < 2GB — well within 8GB | torch.cuda.memory_allocated()
+
+=== TABLE 26 ===
+System Version | Agents | Execution | Expected Accuracy | Expected Latency
+v1 Baseline | 4 agents | Sequential CPU | ~85% | ~450ms
+v2 Parallel CPU | 4 agents | Parallel CPU | ~85% | ~30ms
+v3 All agents CPU | 15 agents | Parallel CPU | ~91% | ~30ms
+v4 GRASP (Full) | 15 agents + GPU | Parallel CPU+GPU | ~93%+ | ~15-20ms
+
+=== TABLE 27 ===
+Final note — why this project is publication-ready
+The combination of: (1) 15-agent parallel swarm, (2) GPU-accelerated GCN on commodity laptop hardware (RTX 4060), (3) adversarial robustness testing, and (4) LLM-powered explainability — all in a single system — is genuinely novel.
+Your ablation study proving that parallel GPU execution reduces latency from 450ms to 15ms without accuracy loss is a clean, reproducible, quantitative result that any reviewer can verify.
+Target conferences: IEEE S&P workshops, NDSS Symposium, INDOCRYPT, or ACM CCS Student Research Competition.
+Good luck building GRASP!

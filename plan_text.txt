@@ -1,0 +1,163 @@
+GRASP
+Graph-based Real-time Agentic Security Platform
+Full Build Plan + Working Plan
+Dynamic Website — Built from Scratch
+Hardware: Intel i7-14650HX + NVIDIA RTX 4060 (8GB VRAM)
+M.Tech CSE — Cybersecurity Specialisation  |  Version 4.0
+
+
+
+1. Project Overview
+GRASP is a full-stack cybersecurity platform built from scratch as a dynamic website. It detects anomalies in medical supply chain networks in real time using 15 parallel AI agents, a GPU-accelerated Graph Neural Network, and an LLM-powered explainability engine. The entire system is exposed through a live React dashboard with real-time graph visualization.
+
+
+
+2. System Architecture Flow
+2.1 Full data flow — end to end
+
+2.2 Architecture layers
+
+
+
+
+2.3 GPU vs CPU agent assignment
+
+
+
+3. Complete Project Folder Structure
+
+
+4. Complete API Reference
+4.1 REST endpoints
+
+4.2 WebSocket endpoint
+
+
+5. Frontend Pages — Dynamic Website Design
+
+5.1 Real-time data flow to UI
+The frontend uses a single persistent WebSocket connection to receive live updates. Zustand manages global state so any component can react to new events without prop drilling. Here is the exact flow when a new event arrives:
+
+Backend detects new event → runs 15-agent parallel swarm (~15ms)
+Decision engine outputs risk score → WebSocket pushes message to all clients
+useWebSocket.js hook receives message → updates Zustand graphStore
+All subscribed components re-render automatically — graph nodes recolor, log panel appends, agent bars update
+If anomaly: Safe Box updates, anomaly counter increments, alert banner shows
+
+5.2 Graph visualization — Cytoscape node styling
+
+
+6. Full 18-Week Build Plan — From Scratch
+
+Phase 1 — Project Setup & Environment (Weeks 1–2)
+
+Phase 2 — GCN Model + v1 Agents + Parallel Engine (Weeks 3–5)
+
+Phase 3 — All 12 CPU Agents + 2 More GPU Agents (Weeks 6–8)
+
+Phase 4 — Specialist Layer + MLP Upgrade (Weeks 9–10)
+
+Phase 5 — Explainability + Adversarial (Weeks 11–12)
+
+Phase 6 — Full React Frontend (Weeks 13–15)
+
+Phase 7 — Integration + WebSocket + Testing (Weeks 16–17)
+
+Phase 8 — Evaluation + Report + Demo (Week 18)
+
+
+7. Daily Working Plan
+
+7.1 Git workflow
+main branch — always demo-ready, never broken
+dev branch — active development, merge to main when feature complete
+feature/agent-name branches — one per agent (e.g. feature/c2-beaconing)
+Commit message format: feat: add C2 beaconing agent | fix: race condition in aggregator | test: add integration test for safe box
+Tag versions: v0.1 (graph done), v0.2 (4 agents), v1.0 (all 15 agents), v2.0 (full frontend)
+
+7.2 Key papers — read in this order
+Hamilton et al. (2017) — GraphSAGE. Your GCN model is based on this.
+Zugner et al. (2018) — Mettack adversarial attacks on GNNs. Your poisoning test.
+Ying et al. (2019) — GNNExplainer. Your explainability module.
+Sommer & Paxson (2010) — ML for network intrusion detection. Background for your CPU agents.
+Milajerdi et al. (2019) — HOLMES: APT detection via provenance graphs. Your temporal agent.
+Alsaheel et al. (2021) — ATLAS: sequence-based attack investigation. Lateral movement agent.
+Continella et al. (2016) — ShieldFS: ransomware detection. Your ransomware agent.
+Park et al. (2023) — Generative Agents. Agentic AI patterns for your swarm design.
+
+
+8. Evaluation Plan
+8.1 System-level metrics
+
+8.2 Ablation study — key paper contribution
+This ablation table is your main research result. It shows: (1) parallelism reduces latency without hurting accuracy, (2) more agents improve accuracy, (3) GPU acceleration improves latency further. Three independent contributions in one table.
+
+
+9. Setup Commands — Run in This Order
+9.1 Backend setup
+# 1. Create virtual environment
+python -m venv venv && source venv/bin/activate
+
+# 2. Install backend dependencies
+pip install fastapi uvicorn[standard] torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+pip install torch-geometric networkx scikit-learn deeprobust pandas numpy scipy
+pip install anthropic openai python-dotenv
+
+# 3. Verify GPU
+python -c "import torch; print('CUDA:', torch.cuda.is_available(), '| GPU:', torch.cuda.get_device_name(0))"
+
+# 4. Run backend
+uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
+
+9.2 Frontend setup
+# 1. Create React app with Vite
+npm create vite@latest frontend -- --template react
+cd frontend
+
+# 2. Install dependencies
+npm install tailwindcss @tailwindcss/vite cytoscape recharts chart.js
+npm install zustand react-router-dom axios
+
+# 3. Run dev server
+npm run dev   # runs on http://localhost:5173
+
+
+10. Final Submission Checklist
+Backend
+CUDA verified — torch.cuda.is_available() = True on RTX 4060
+GCN trained on CICIDS2017, inference < 3ms on GPU
+All 15 agents implemented, each returns float score [0,1]
+Aggregator uses ThreadPoolExecutor(max_workers=15) with 100ms timeout per agent
+GPU agents (GCN, Zero-day, Temporal/APT) all use .to('cuda')
+Behavior Agent uses threading.Lock() for sliding window state
+Snapshot freeze before agent dispatch — all agents read same frozen graph
+Adaptive MLP: 18 inputs, [64,32] hidden, CUDA, retrain endpoint working
+GNNExplainer + LLM explainer working per anomalous node
+Adversarial: Mettack poisoning + PGD evasion tests implemented
+WebSocket server broadcasting live events to all clients
+All 14 REST endpoints tested via Postman
+
+Frontend
+React 18 + Vite + TailwindCSS project running on :5173
+WebSocket hook connected — live updates reaching all pages
+Zustand store managing global state correctly
+Dashboard: 4 KPI cards + risk timeline chart live
+Graph View: Cytoscape graph with color-coded nodes, click for details
+Real-Time: scrolling event log + simulate button working
+Agent Status: 15 live score bars animating on each event
+Anomalies: per-node 15-agent score breakdown working
+Explainability: GNNExplainer subgraph + LLM text report rendering
+Attack Sim: all 15 attack buttons working, graph updates visible
+Safe Box: quarantine cards + release button working
+Robustness: before/after accuracy charts from adversarial tests
+
+Evaluation + Research
+Accuracy, Precision, Recall, F1, AUC-ROC on CICIDS2017 recorded
+Ablation study table complete: v1 vs v2 vs v3 vs GRASP
+Adversarial results: accuracy drop under poisoning, FNR under evasion
+Latency benchmark: sequential vs parallel CPU vs parallel GPU
+8 key papers read and cited in report
+Research paper / thesis complete
+15-slide presentation ready
+10-minute demo video recorded
+

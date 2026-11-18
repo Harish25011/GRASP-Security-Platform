@@ -1,0 +1,501 @@
+payload,is_attack
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/users?page=32 HTTP/1.1,0
+PUT /api/patient/486/records body=vitals_update,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/shipment/track tracking_id=966,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/inventory?warehouse=main&status=active,0
+POST /api/search query=medical+supplies,0
+GET /dashboard/stats?range=7d,0
+POST /api/shipment/track tracking_id=818,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/users?page=133 HTTP/1.1,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/users?page=1 HTTP/1.1,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /dashboard/stats?range=7d,0
+PUT /api/patient/529/records body=vitals_update,0
+GET /dashboard/stats?range=7d,0
+GET /api/reports/monthly?format=pdf,0
+PUT /api/patient/897/records body=vitals_update,0
+GET /api/users?page=583 HTTP/1.1,0
+POST /api/order item_id=625 qty=781,0
+POST /api/shipment/track tracking_id=863,0
+GET /dashboard/stats?range=7d,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/inventory?warehouse=main&status=active,0
+POST /api/order item_id=336 qty=750,0
+POST /api/search query=medical+supplies,0
+POST /api/order item_id=185 qty=680,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /api/products?category=antibiotics&sort=price,0
+POST /api/search query=medical+supplies,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/search query=medical+supplies,0
+PUT /api/patient/911/records body=vitals_update,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /dashboard/stats?range=7d,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /dashboard/stats?range=7d,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /dashboard/stats?range=7d,0
+GET /api/inventory?warehouse=main&status=active,0
+POST /api/order item_id=896 qty=40,0
+PUT /api/patient/331/records body=vitals_update,0
+GET /api/users?page=531 HTTP/1.1,0
+GET /api/users?page=742 HTTP/1.1,0
+PUT /api/patient/444/records body=vitals_update,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/users?page=60 HTTP/1.1,0
+POST /api/search query=medical+supplies,0
+POST /api/shipment/track tracking_id=852,0
+PUT /api/patient/99/records body=vitals_update,0
+GET /api/users?page=7 HTTP/1.1,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /dashboard/stats?range=7d,0
+GET /api/users?page=188 HTTP/1.1,0
+PUT /api/patient/60/records body=vitals_update,0
+GET /dashboard/stats?range=7d,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/auth/login username=admin password=securePass123!,0
+PUT /api/patient/242/records body=vitals_update,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /dashboard/stats?range=7d,0
+POST /api/shipment/track tracking_id=817,0
+POST /api/auth/login username=admin password=securePass123!,0
+PUT /api/patient/756/records body=vitals_update,0
+POST /api/shipment/track tracking_id=53,0
+GET /dashboard/stats?range=7d,0
+POST /api/search query=medical+supplies,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /dashboard/stats?range=7d,0
+GET /dashboard/stats?range=7d,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /dashboard/stats?range=7d,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /dashboard/stats?range=7d,0
+GET /api/products?category=antibiotics&sort=price,0
+POST /api/order item_id=639 qty=661,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/users?page=459 HTTP/1.1,0
+POST /api/shipment/track tracking_id=405,0
+GET /api/users?page=826 HTTP/1.1,0
+POST /api/shipment/track tracking_id=861,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/shipment/track tracking_id=814,0
+GET /api/inventory?warehouse=main&status=active,0
+POST /api/shipment/track tracking_id=235,0
+POST /api/auth/login username=admin password=securePass123!,0
+PUT /api/patient/407/records body=vitals_update,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/search query=medical+supplies,0
+GET /dashboard/stats?range=7d,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/order item_id=50 qty=965,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/shipment/track tracking_id=443,0
+POST /api/search query=medical+supplies,0
+GET /api/products?category=antibiotics&sort=price,0
+POST /api/order item_id=747 qty=708,0
+POST /api/order item_id=987 qty=566,0
+GET /api/reports/monthly?format=pdf,0
+PUT /api/patient/540/records body=vitals_update,0
+GET /api/inventory?warehouse=main&status=active,0
+PUT /api/patient/15/records body=vitals_update,0
+GET /api/users?page=691 HTTP/1.1,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/search query=medical+supplies,0
+POST /api/auth/login username=admin password=securePass123!,0
+PUT /api/patient/835/records body=vitals_update,0
+POST /api/search query=medical+supplies,0
+POST /api/search query=medical+supplies,0
+POST /api/auth/login username=admin password=securePass123!,0
+PUT /api/patient/155/records body=vitals_update,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/auth/login username=admin password=securePass123!,0
+PUT /api/patient/900/records body=vitals_update,0
+PUT /api/patient/280/records body=vitals_update,0
+POST /api/search query=medical+supplies,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /dashboard/stats?range=7d,0
+GET /dashboard/stats?range=7d,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /dashboard/stats?range=7d,0
+PUT /api/patient/917/records body=vitals_update,0
+POST /api/search query=medical+supplies,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/users?page=799 HTTP/1.1,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /dashboard/stats?range=7d,0
+GET /dashboard/stats?range=7d,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/products?category=antibiotics&sort=price,0
+PUT /api/patient/103/records body=vitals_update,0
+GET /api/users?page=356 HTTP/1.1,0
+POST /api/order item_id=757 qty=298,0
+GET /dashboard/stats?range=7d,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/search query=medical+supplies,0
+POST /api/shipment/track tracking_id=295,0
+POST /api/order item_id=637 qty=260,0
+GET /api/users?page=518 HTTP/1.1,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /dashboard/stats?range=7d,0
+POST /api/order item_id=485 qty=631,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/order item_id=589 qty=52,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/users?page=316 HTTP/1.1,0
+GET /api/inventory?warehouse=main&status=active,0
+POST /api/order item_id=481 qty=540,0
+GET /api/reports/monthly?format=pdf,0
+PUT /api/patient/288/records body=vitals_update,0
+GET /api/reports/monthly?format=pdf,0
+PUT /api/patient/858/records body=vitals_update,0
+POST /api/order item_id=791 qty=654,0
+GET /api/users?page=965 HTTP/1.1,0
+POST /api/shipment/track tracking_id=634,0
+GET /api/reports/monthly?format=pdf,0
+PUT /api/patient/717/records body=vitals_update,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/search query=medical+supplies,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/search query=medical+supplies,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/order item_id=229 qty=485,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/products?category=antibiotics&sort=price,0
+POST /api/shipment/track tracking_id=46,0
+GET /api/users?page=598 HTTP/1.1,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/inventory?warehouse=main&status=active,0
+POST /api/order item_id=971 qty=295,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/users?page=884 HTTP/1.1,0
+GET /api/users?page=527 HTTP/1.1,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/inventory?warehouse=main&status=active,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /api/users?page=862 HTTP/1.1,0
+GET /api/users?page=924 HTTP/1.1,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /dashboard/stats?range=7d,0
+GET /api/users?page=259 HTTP/1.1,0
+POST /api/order item_id=352 qty=590,0
+GET /dashboard/stats?range=7d,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/users?page=901 HTTP/1.1,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /dashboard/stats?range=7d,0
+GET /dashboard/stats?range=7d,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/shipment/track tracking_id=395,0
+POST /api/shipment/track tracking_id=681,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /dashboard/stats?range=7d,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/users?page=743 HTTP/1.1,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/users?page=653 HTTP/1.1,0
+GET /dashboard/stats?range=7d,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /api/users?page=197 HTTP/1.1,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /dashboard/stats?range=7d,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/products?category=antibiotics&sort=price,0
+PUT /api/patient/16/records body=vitals_update,0
+GET /api/users?page=516 HTTP/1.1,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/inventory?warehouse=main&status=active,0
+POST /api/order item_id=627 qty=472,0
+POST /api/search query=medical+supplies,0
+POST /api/search query=medical+supplies,0
+POST /api/order item_id=333 qty=223,0
+PUT /api/patient/139/records body=vitals_update,0
+PUT /api/patient/554/records body=vitals_update,0
+GET /dashboard/stats?range=7d,0
+GET /api/inventory?warehouse=main&status=active,0
+POST /api/search query=medical+supplies,0
+POST /api/shipment/track tracking_id=655,0
+GET /dashboard/stats?range=7d,0
+GET /dashboard/stats?range=7d,0
+POST /api/auth/login username=admin password=securePass123!,0
+PUT /api/patient/315/records body=vitals_update,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/shipment/track tracking_id=604,0
+POST /api/order item_id=180 qty=292,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/reports/monthly?format=pdf,0
+PUT /api/patient/437/records body=vitals_update,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/shipment/track tracking_id=628,0
+POST /api/search query=medical+supplies,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/shipment/track tracking_id=30,0
+GET /api/users?page=176 HTTP/1.1,0
+GET /api/users?page=245 HTTP/1.1,0
+POST /api/search query=medical+supplies,0
+POST /api/search query=medical+supplies,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/order item_id=752 qty=646,0
+GET /api/users?page=742 HTTP/1.1,0
+POST /api/shipment/track tracking_id=353,0
+POST /api/search query=medical+supplies,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/order item_id=600 qty=975,0
+POST /api/order item_id=545 qty=212,0
+PUT /api/patient/628/records body=vitals_update,0
+POST /api/order item_id=975 qty=693,0
+POST /api/order item_id=783 qty=454,0
+GET /api/reports/monthly?format=pdf,0
+GET /dashboard/stats?range=7d,0
+GET /api/users?page=144 HTTP/1.1,0
+PUT /api/patient/548/records body=vitals_update,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/users?page=166 HTTP/1.1,0
+PUT /api/patient/744/records body=vitals_update,0
+POST /api/shipment/track tracking_id=380,0
+GET /api/reports/monthly?format=pdf,0
+PUT /api/patient/379/records body=vitals_update,0
+PUT /api/patient/753/records body=vitals_update,0
+POST /api/search query=medical+supplies,0
+GET /api/products?category=antibiotics&sort=price,0
+PUT /api/patient/574/records body=vitals_update,0
+GET /api/users?page=955 HTTP/1.1,0
+POST /api/shipment/track tracking_id=759,0
+GET /api/inventory?warehouse=main&status=active,0
+POST /api/shipment/track tracking_id=142,0
+GET /api/users?page=743 HTTP/1.1,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/order item_id=729 qty=864,0
+POST /api/order item_id=994 qty=452,0
+POST /api/order item_id=393 qty=39,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/inventory?warehouse=main&status=active,0
+POST /api/order item_id=54 qty=46,0
+GET /api/users?page=484 HTTP/1.1,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/order item_id=166 qty=346,0
+GET /api/products?category=antibiotics&sort=price,0
+POST /api/order item_id=68 qty=660,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/shipment/track tracking_id=689,0
+PUT /api/patient/148/records body=vitals_update,0
+POST /api/order item_id=369 qty=921,0
+GET /api/users?page=125 HTTP/1.1,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/users?page=524 HTTP/1.1,0
+GET /dashboard/stats?range=7d,0
+GET /dashboard/stats?range=7d,0
+GET /api/users?page=559 HTTP/1.1,0
+GET /dashboard/stats?range=7d,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /api/reports/monthly?format=pdf,0
+GET /dashboard/stats?range=7d,0
+PUT /api/patient/882/records body=vitals_update,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/search query=medical+supplies,0
+POST /api/search query=medical+supplies,0
+GET /dashboard/stats?range=7d,0
+PUT /api/patient/124/records body=vitals_update,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/inventory?warehouse=main&status=active,0
+PUT /api/patient/709/records body=vitals_update,0
+POST /api/shipment/track tracking_id=595,0
+GET /api/users?page=121 HTTP/1.1,0
+PUT /api/patient/17/records body=vitals_update,0
+GET /api/products?category=antibiotics&sort=price,0
+POST /api/shipment/track tracking_id=396,0
+GET /api/reports/monthly?format=pdf,0
+PUT /api/patient/411/records body=vitals_update,0
+GET /api/products?category=antibiotics&sort=price,0
+POST /api/search query=medical+supplies,0
+GET /dashboard/stats?range=7d,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/inventory?warehouse=main&status=active,0
+POST /api/search query=medical+supplies,0
+POST /api/search query=medical+supplies,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /dashboard/stats?range=7d,0
+GET /api/reports/monthly?format=pdf,0
+GET /dashboard/stats?range=7d,0
+POST /api/order item_id=98 qty=986,0
+POST /api/search query=medical+supplies,0
+PUT /api/patient/271/records body=vitals_update,0
+GET /api/users?page=452 HTTP/1.1,0
+GET /api/inventory?warehouse=main&status=active,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /api/reports/monthly?format=pdf,0
+PUT /api/patient/924/records body=vitals_update,0
+POST /api/search query=medical+supplies,0
+POST /api/shipment/track tracking_id=42,0
+POST /api/shipment/track tracking_id=598,0
+GET /api/users?page=398 HTTP/1.1,0
+GET /dashboard/stats?range=7d,0
+PUT /api/patient/826/records body=vitals_update,0
+GET /api/users?page=961 HTTP/1.1,0
+GET /api/users?page=165 HTTP/1.1,0
+GET /api/inventory?warehouse=main&status=active,0
+POST /api/order item_id=656 qty=815,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/products?category=antibiotics&sort=price,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/search query=medical+supplies,0
+GET /dashboard/stats?range=7d,0
+GET /dashboard/stats?range=7d,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/order item_id=270 qty=111,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /api/users?page=439 HTTP/1.1,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /api/inventory?warehouse=main&status=active,0
+POST /api/shipment/track tracking_id=755,0
+GET /api/users?page=53 HTTP/1.1,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/shipment/track tracking_id=767,0
+POST /api/order item_id=296 qty=427,0
+GET /dashboard/stats?range=7d,0
+PUT /api/patient/815/records body=vitals_update,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/products?category=antibiotics&sort=price,0
+POST /api/order item_id=269 qty=288,0
+POST /api/order item_id=529 qty=535,0
+POST /api/order item_id=86 qty=487,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/search query=medical+supplies,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/products?category=antibiotics&sort=price,0
+POST /api/search query=medical+supplies,0
+GET /api/users?page=555 HTTP/1.1,0
+POST /api/order item_id=836 qty=249,0
+POST /api/search query=medical+supplies,0
+GET /api/users?page=328 HTTP/1.1,0
+POST /api/order item_id=98 qty=696,0
+PUT /api/patient/449/records body=vitals_update,0
+POST /api/order item_id=458 qty=506,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/users?page=111 HTTP/1.1,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /api/users?page=562 HTTP/1.1,0
+GET /api/reports/monthly?format=pdf,0
+PUT /api/patient/427/records body=vitals_update,0
+POST /api/order item_id=912 qty=555,0
+GET /api/reports/monthly?format=pdf,0
+GET /dashboard/stats?range=7d,0
+GET /api/users?page=853 HTTP/1.1,0
+PUT /api/patient/822/records body=vitals_update,0
+POST /api/order item_id=433 qty=14,0
+GET /api/users?page=86 HTTP/1.1,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/products?category=antibiotics&sort=price,0
+POST /api/order item_id=912 qty=721,0
+POST /api/search query=medical+supplies,0
+PUT /api/patient/711/records body=vitals_update,0
+POST /api/order item_id=188 qty=801,0
+POST /api/order item_id=588 qty=271,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/order item_id=721 qty=298,0
+PUT /api/patient/425/records body=vitals_update,0
+GET /dashboard/stats?range=7d,0
+POST /api/search query=medical+supplies,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/users?page=628 HTTP/1.1,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /api/inventory?warehouse=main&status=active,0
+POST /api/search query=medical+supplies,0
+POST /api/shipment/track tracking_id=238,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/search query=medical+supplies,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/reports/monthly?format=pdf,0
+GET /api/inventory?warehouse=main&status=active,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /api/products?category=antibiotics&sort=price,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/shipment/track tracking_id=607,0
+POST /api/order item_id=914 qty=337,0
+POST /api/order item_id=78 qty=241,0
+GET /api/reports/monthly?format=pdf,0
+PUT /api/patient/900/records body=vitals_update,0
+POST /api/search query=medical+supplies,0
+POST /api/shipment/track tracking_id=282,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/auth/login username=admin password=securePass123!,0
+GET /dashboard/stats?range=7d,0
+GET /dashboard/stats?range=7d,0
+GET /api/inventory?warehouse=main&status=active,0
+GET /api/inventory?warehouse=main&status=active,0
+POST /api/shipment/track tracking_id=569,0
+POST /api/auth/login username=admin password=securePass123!,0
+POST /api/shipment/track tracking_id=485,0
+POST /api/shipment/track tracking_id=937,0
+POST /api/search query=medical+supplies,0
+POST /api/search query=medical+supplies,0
+POST /api/order item_id=292 qty=714,0
+POST /api/shipment/track tracking_id=522,0
+POST /api/order item_id=469 qty=59,0
+GET /dashboard/stats?range=7d,0
+POST /api/search query=medical+supplies,0
+POST /api/order item_id=475 qty=747,0
+GET /api/reports/monthly?format=pdf,0
+POST /api/order item_id=459 qty=810,0
+POST /api/shipment/track tracking_id=27,0
+POST /api/shipment/track tracking_id=28,0
+PUT /api/patient/771/records body=vitals_update,0
+GET /api/users?page=337 HTTP/1.1,0
+GET /api/products?category=antibiotics&sort=price,0
+POST /api/order item_id=87 qty=311,0

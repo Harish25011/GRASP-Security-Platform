@@ -1,0 +1,202 @@
+GRASP
+Complete Upgrade Guide
+All Changes · New Additions · Where to Add · Implementation Prompts
+Based on: AI Architecture Upgrade + Full System Audit + Frontend Prompts
+System Architecture Overview
+The GRASP system is designed as a hybrid multi-agent AI-based cybersecurity framework that combines rule-based detection with machine learning-driven decision making.
+The system processes incoming events through a pipeline consisting of parallel agent execution, feature extraction, AI-based classification, and automated response mechanisms.
+Each agent specializes in detecting a specific class of cyber threats such as brute force attacks, SQL injection, DDoS, and lateral movement. These agents operate concurrently and produce normalized risk scores.
+The outputs from all agents are aggregated into a feature vector, which is then processed by a deep learning-based meta-classifier. The classifier produces a final risk score that determines the severity of the event.
+Based on this risk score, the system categorizes events into four tiers: Normal, Watch, Suspicious, and Critical. Critical threats trigger immediate response actions such as isolation or blocking.
+This architecture ensures real-time detection, scalability, and adaptability to evolving cyber threats.
+Part 1 — What to Keep, Fix, and Upgrade
+1.1 Keep as-is — do not touch
+1.2 Fix these — currently wrong
+1.3 Upgrade these — good idea, make it stronger
+Part 2 — Backend: Exact File Changes
+2.1 Modify existing files
+backend/agents/base_agent.py — add confidence output
+Change the abstract base class so every agent returns a tuple instead of a float:
+# BEFORE
+def score(self, snapshot) -> float: ...
+# AFTER
+def score(self, snapshot) -> tuple[float, float]:
+# returns (risk_score, confidence) both in [0, 1]
+...
+backend/agents/cpu/*.py — update all 14 CPU agents
+Each agent must now return (score, confidence). Confidence is how certain the agent is. For rule-based agents like Signature, confidence = 1.0 when it fires (regex match is certain). For statistical agents like Spike, confidence = min(1.0, z_score / 5.0). Example:
+# signature_agent.py
+def score(self, snapshot) -> tuple[float, float]:
+match = self._check_patterns(snapshot)
+if match:
+return (1.0, 1.0)   # certain match
+return (0.0, 0.95)      # certain no-match
+# spike_agent.py
+def score(self, snapshot) -> tuple[float, float]:
+z = self._compute_zscore(snapshot)
+risk = min(1.0, z / 3.0)
+confidence = min(1.0, z / 5.0)
+return (risk, confidence)
+backend/services/aggregator.py — extend feature vector
+After collecting 15 agent tuples, build the extended 30-dimensional feature vector:
+scores    = [s for (s, c) in agent_results]   # 15 dims
+confs     = [c for (s, c) in agent_results]   # 15 dims
+# optional extras from feature_engineering
+node_deg  = [snapshot.degree(n) for n in targets]
+hour_norm = datetime.now().hour / 23.0
+past5     = self.history.get_last_n(node_id, 5)
+feature_vector = scores + confs  # start with 30-dim
+backend/services/decision_engine.py — 3-tier thresholds
+THRESHOLDS = {
+'critical':    0.70,   # quarantine immediately
+'suspicious':  0.50,   # flag and monitor
+'watch':       0.30,   # log only
+}
+def classify(risk: float) -> str:
+if risk >= THRESHOLDS['critical']:   return 'CRITICAL'
+if risk >= THRESHOLDS['suspicious']: return 'SUSPICIOUS'
+if risk >= THRESHOLDS['watch']:      return 'WATCH'
+return 'NORMAL'
+backend/models/meta_classifier.py — add attention layer
+import torch, torch.nn as nn
+class GRASPClassifier(nn.Module):
+def __init__(self, input_dim=30):
+super().__init__()
+self.attn = nn.MultiheadAttention(input_dim, num_heads=5, batch_first=True)
+self.fc1  = nn.Linear(input_dim, 64)
+self.fc2  = nn.Linear(64, 32)
+self.out  = nn.Linear(32, 1)
+self.relu = nn.ReLU()
+self.sig  = nn.Sigmoid()
+def forward(self, x):
+x = x.unsqueeze(1)                   # add seq dim
+x, _ = self.attn(x, x, x)            # self-attention
+x = x.squeeze(1)
+x = self.relu(self.fc1(x))
+x = self.relu(self.fc2(x))
+return self.sig(self.out(x))
+backend/services/stream_processor.py — add backpressure + dedup
+from collections import OrderedDict
+import hashlib
+DEDUP_CACHE = OrderedDict()   # LRU, max 10000 entries
+DROP_COUNTER = 0
+async def ingest_event(event: dict):
+# Deduplication
+key = hashlib.md5(str(event).encode()).hexdigest()
+if key in DEDUP_CACHE:
+return   # duplicate — skip silently
+DEDUP_CACHE[key] = True
+if len(DEDUP_CACHE) > 10000:
+DEDUP_CACHE.popitem(last=False)
+# Backpressure
+if event_queue.full():
+global DROP_COUNTER
+DROP_COUNTER += 1
+logger.warning(f'Queue full — dropped event #{DROP_COUNTER}')
+return
+await event_queue.put(event)
+2.2 Create new backend files
+backend/ai_model/train.py — full training pipeline
+from imblearn.over_sampling import SMOTE
+from sklearn.model_selection import StratifiedKFold
+from sklearn.metrics import f1_score, roc_auc_score, matthews_corrcoef
+import torch
+def train(X, y, model, device='cuda', n_splits=5, epochs=100):
+# 1. Handle class imbalance with SMOTE
+sm = SMOTE(random_state=42)
+X_res, y_res = sm.fit_resample(X, y)
+# 2. 5-fold cross-validation
+kf = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=42)
+fold_metrics = []
+for fold, (tr_idx, val_idx) in enumerate(kf.split(X_res, y_res)):
+X_tr, X_val = X_res[tr_idx], X_res[val_idx]
+y_tr, y_val = y_res[tr_idx], y_res[val_idx]
+# train model on fold, record val metrics
+metrics = _train_fold(model, X_tr, y_tr, X_val, y_val, device, epochs)
+fold_metrics.append(metrics)
+print(f'Fold {fold+1}: F1={metrics["f1"]:.3f} AUC={metrics["auc"]:.3f} MCC={metrics["mcc"]:.3f}')
+# 3. Save best model checkpoint
+torch.save(model.state_dict(), 'checkpoints/grasp_classifier.pt')
+return fold_metrics
+backend/services/shap_explainer.py — MLP explainability
+import shap, torch, numpy as np
+class SHAPExplainer:
+def __init__(self, model, background_data):
+self.explainer = shap.DeepExplainer(model, background_data)
+def explain(self, feature_vector: np.ndarray, agent_names: list) -> dict:
+shap_values = self.explainer.shap_values(feature_vector)
+return {
+name: float(val)
+for name, val in zip(agent_names, shap_values[0])
+}
+# Returns: {'port_scan': 0.42, 'spike': 0.31, 'behavior': -0.06, ...}
+backend/api/routes.py — new endpoints to add
+Part 3 — Frontend: Exact File Changes
+3.1 Modify existing pages
+3.2 Modify existing components
+3.3 Modify Zustand store
+frontend/store/graphStore.js — add new state slices
+// Add to existing store:
+shapValues: {},          // {node_id: {agent_name: shap_value}}
+feedbackLog: [],         // [{event_id, label, timestamp}]
+modelHealth: {           // model drift monitoring
+accuracy: 0,
+driftAlert: false,
+lastRetrained: null
+},
+streamStatus: {          // stream processor health
+queueDepth: 0,
+dropCount: 0,
+eventsPerSec: 0,
+workerCount: 8
+},
+agentConfidence: {},     // {agent_name: confidence_value}
+riskTier: 'NORMAL',      // CRITICAL | SUSPICIOUS | WATCH | NORMAL
+Part 4 — Two New Pages
+4.1 Stream Architecture page
+4.2 Live Threat Monitor page
+Remediation templates — 9 attack types with real commands
+AI Model Description
+The GRASP system utilizes a Multi-Layer Perceptron (MLP) enhanced with a self-attention mechanism as its primary decision-making model.
+The input to the model is a feature vector constructed from the outputs of multiple agents. This vector includes both risk scores and confidence values from each agent, resulting in a high-dimensional representation of system behavior.
+The self-attention layer enables the model to dynamically weigh the importance of different agents for each event, allowing it to focus on the most relevant signals.
+The architecture consists of:
+Input layer (30-dimensional feature vector)
+Self-attention layer for feature weighting
+Two hidden layers (64 and 32 neurons)
+Output layer producing a probability score
+This model allows the system to capture complex, non-linear relationships between different types of cyber threats.
+Part 5 — AI Architecture Upgrade: Step by Step
+5.1 Training pipeline — build this first
+The entire AI architecture upgrade depends on having real labeled training data. Without this, the MLP makes random decisions. Build this before anything else.
+Training Pipeline
+The GRASP system includes a structured training pipeline to ensure accurate and reliable threat detection.
+The training process begins with the collection of labeled cybersecurity datasets such as CICIDS2017, along with simulated attack data from a controlled lab environment.
+Feature vectors are generated by running all agents on each event, producing a numerical representation of system behavior.
+To address class imbalance, the Synthetic Minority Over-sampling Technique (SMOTE) is applied to the dataset.
+The model is trained using 5-fold cross-validation to ensure generalization and prevent overfitting. Performance is evaluated using multiple metrics, including:
+F1 Score
+AUC-ROC
+Matthews Correlation Coefficient (MCC)
+The final trained model is saved and deployed within the real-time system for inference.
+This pipeline ensures that the system continuously improves and adapts to new threat patterns.
+5.2 SHAP integration — build second
+Explainable AI (XAI)
+To ensure transparency and trust, the GRASP system incorporates explainable AI techniques using SHAP (SHapley Additive exPlanations).
+SHAP values quantify the contribution of each agent to the final prediction made by the model.
+Positive SHAP values indicate that an agent contributed toward classifying an event as an attack, while negative values indicate normal behavior.
+These explanations are presented to analysts through the dashboard, enabling them to understand why a particular decision was made.
+This capability is essential for cybersecurity systems where interpretability and accountability are critical.
+5.3 Human feedback loop — build third
+Part 6 — Implementation Prompts (Copy-Paste Ready)
+These are complete, self-contained prompts. Each one handles one part of the upgrade. Use them in order.
+Prompt 1 — Agent confidence output upgrade
+Prompt 2 — 3-tier threshold system
+Prompt 3 — Attention-layer MLP
+Prompt 4 — Training pipeline with SMOTE + CV
+Prompt 5 — SHAP explainability
+Prompt 6 — Human feedback loop
+Prompt 7 — Stream Architecture page
+Prompt 8 — Live Threat Monitor page
+Part 7 — Priority Build Order
+Build in this exact sequence. Each step depends on the previous one being complete.
