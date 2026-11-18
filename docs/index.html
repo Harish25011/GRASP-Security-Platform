@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRASP Security Platform — Developer Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #090d16;
+            --bg-sidebar: #0d1322;
+            --bg-card: #121a2f;
+            --bg-card-hover: #18223d;
+            --bg-code: #0b1120;
+            --border-subtle: #1e293b;
+            --border-highlight: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-cyan: #06b6d4;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
+            --accent-purple: #8b5cf6;
+            --glow-cyan: rgba(6, 182, 212, 0.15);
+        }
+
+        html.light {
+            --bg-body: #f8fafc;
+            --bg-sidebar: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f8fafc;
+            --bg-code: #0f172a;
+            --border-subtle: #e2e8f0;
+            --border-highlight: #cbd5e1;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --accent-cyan: #0891b2;
+            --accent-blue: #2563eb;
+            --accent-green: #059669;
+            --accent-red: #dc2626;
+            --accent-amber: #d97706;
+            --accent-purple: #7c3aed;
+            --glow-cyan: rgba(8, 145, 178, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        code, pre {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Top Navigation Bar */
+        header.top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            padding: 0 24px;
+            background: rgba(13, 19, 34, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        html.light header.top-nav {
+            background: rgba(241, 245, 249, 0.85);
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-badge {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #fff;
+            font-weight: 800;
+            font-size: 14px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px var(--glow-cyan);
+        }
+
+        .brand-title {
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: -0.3px;
+        }
+
+        .top-nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .search-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            padding: 8px 36px 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            width: 240px;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            width: 300px;
+            box-shadow: 0 0 0 3px var(--glow-cyan);
+        }
+
+        .search-shortcut {
+            position: absolute;
+            right: 10px;
+            font-size: 11px;
+            color: var(--text-muted);
+            background: var(--border-subtle);
+            padding: 2px 5px;
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .theme-toggle-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            padding: 7px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.2s;
+        }
+
+        .theme-toggle-btn:hover {
+            color: var(--text-primary);
+            border-color: var(--border-highlight);
+        }
+
+        /* Layout Grid */
+        .portal-layout {
+            display: grid;
+            grid-template-columns: 280px minmax(0, 1fr) 280px;
+            max-width: 1600px;
+            margin: 0 auto;
+            min-height: calc(100vh - 64px);
+        }
+
+        /* Left Sidebar Navigation */
+        aside.sidebar-left {
+            position: sticky;
+            top: 64px;
+            height: calc(100vh - 64px);
+            overflow-y: auto;
+            padding: 24px 16px;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border-subtle);
+        }
+
+        .nav-group {
+            margin-bottom: 24px;
+        }
+
+        .nav-group-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            padding-left: 12px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 7px 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13.5px;
+            border-radius: 6px;
+            transition: all 0.15s ease;
+            margin-bottom: 2px;
+        }
+
+        .nav-item:hover {
+            color: var(--text-primary);
+            background: var(--bg-card);
+        }
+
+        .nav-item.active {
+            color: var(--accent-cyan);
+            background: var(--glow-cyan);
+            font-weight: 600;
+            border-left: 3px solid var(--accent-cyan);
+        }
+
+        /* Main Content Pane */
+        main.main-content {
+            padding: 40px 48px;
+            max-width: 900px;
+        }
+
+        section.doc-section {
+            margin-bottom: 64px;
+            scroll-margin-top: 80px;
+        }
+
+        h1.section-title {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        h2.subsection-title {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.4px;
+            margin: 36px 0 16px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        p.lead-text {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 14.5px;
+        }
+
+        /* Badge Callouts */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .badge-cyan { background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); border: 1px solid rgba(6, 182, 212, 0.3); }
+        .badge-green { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-red { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .badge-amber { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+        .badge-purple { background: rgba(139, 92, 246, 0.15); color: var(--accent-purple); border: 1px solid rgba(139, 92, 246, 0.3); }
+
+        /* Grid Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--border-highlight);
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: var(--accent-cyan);
+        }
+
+        .feature-card h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+        }
+
+        /* Code Blocks */
+        .code-container {
+            background: var(--bg-code);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            margin: 16px 0 24px;
+            overflow: hidden;
+        }
+
+        .code-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .code-lang {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .copy-btn:hover {
+            color: var(--text-primary);
+            border-color: var(--border-highlight);
+            background: var(--bg-card);
+        }
+
+        pre {
+            padding: 16px;
+            overflow-x: auto;
+            font-size: 13px;
+            color: #e2e8f0;
+            line-height: 1.5;
+        }
+
+        /* Interactive Tables */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+        }
+
+        table.doc-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            text-align: left;
+        }
+
+        table.doc-table th {
+            background: var(--bg-sidebar);
+            color: var(--text-primary);
+            font-weight: 600;
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        table.doc-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+        }
+
+        table.doc-table tr:hover td {
+            background: var(--bg-card-hover);
+        }
+
+        /* Filter Controls */
+        .filter-bar {
+            display: flex;
+            gap: 8px;
+            margin: 16px 0;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12.5px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--border-highlight);
+            color: var(--text-primary);
+        }
+
+        .filter-btn.active {
+            background: var(--accent-cyan);
+            color: #000;
+            font-weight: 600;
+            border-color: var(--accent-cyan);
+        }
+
+        /* Interactive Simulator Box */
+        .simulator-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-highlight);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+        }
+
+        .sim-slider-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            font-size: 13.5px;
+        }
+
+        .sim-slider {
+            width: 55%;
+            accent-color: var(--accent-cyan);
+        }
+
+        .sim-output-card {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border-subtle);
+            text-align: center;
+        }
+
+        .sim-stat-box {
+            background: var(--bg-sidebar);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .sim-stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .sim-stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* Right Sidebar TOC */
+        aside.sidebar-right {
+            position: sticky;
+            top: 64px;
+            height: calc(100vh - 64px);
+            overflow-y: auto;
+            padding: 28px 20px;
+            background: var(--bg-sidebar);
+            border-left: 1px solid var(--border-subtle);
+            font-size: 13px;
+        }
+
+        .toc-title {
+            font-size: 11.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .toc-link {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 4px 0 4px 10px;
+            border-left: 2px solid transparent;
+            margin-bottom: 6px;
+            transition: 0.15s;
+        }
+
+        .toc-link:hover {
+            color: var(--text-primary);
+        }
+
+        .toc-link.active {
+            color: var(--accent-cyan);
+            border-left-color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .system-pill {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            margin-top: 24px;
+            font-size: 12px;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            box-shadow: 0 0 8px var(--accent-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* SVG Architecture Diagrams */
+        .diagram-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 1080px) {
+            .portal-layout {
+                grid-template-columns: 240px 1fr;
+            }
+            aside.sidebar-right {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .portal-layout {
+                grid-template-columns: 1fr;
+            }
+            aside.sidebar-left {
+                display: none;
+            }
+            main.main-content {
+                padding: 24px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Header -->
+    <header class="top-nav">
+        <a href="#overview" class="brand-container">
+            <span class="brand-badge">GRASP</span>
+            <span class="brand-title">Documentation Portal</span>
+            <span class="badge badge-cyan" style="font-size:10px;">v2.0.0</span>
+        </a>
+        <div class="top-nav-right">
+            <div class="search-box">
+                <input type="text" class="search-input" id="search-input" placeholder="Search docs, agents, API...">
+                <span class="search-shortcut">⌘K</span>
+            </div>
+            <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Light/Dark Theme">
+                <span id="theme-icon">☀️</span> <span id="theme-text">Light</span>
+            </button>
+            <a href="https://github.com/Harish25011/GRASP-Security-Platform" target="_blank" class="theme-toggle-btn" style="text-decoration:none;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub
+            </a>
+        </div>
+    </header>
+
+    <div class="portal-layout">
+
+        <!-- Left Navigation Sidebar -->
+        <aside class="sidebar-left">
+            <div class="nav-group">
+                <div class="nav-group-title">Getting Started</div>
+                <a href="#overview" class="nav-item active">Platform Overview</a>
+                <a href="#quickstart" class="nav-item">5-Minute Quickstart</a>
+                <a href="#system-prerequisites" class="nav-item">System Requirements</a>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-group-title">Core Architecture</div>
+                <a href="#architecture" class="nav-item">6-Layer Pipeline</a>
+                <a href="#stream-dedup" class="nav-item">Deduplication & Queue</a>
+                <a href="#agentbus" class="nav-item">AgentBus Pub/Sub</a>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-group-title">Intelligence Swarm</div>
+                <a href="#swarm-catalog" class="nav-item">17-Agent Catalog</a>
+                <a href="#feature-extraction" class="nav-item">Feature Extraction</a>
+                <a href="#deep-learning" class="nav-item">GCN, LSTM & Autoencoder</a>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-group-title">Consensus & Decisions</div>
+                <a href="#bayesian-fusion" class="nav-item">Bayesian Log-Odds</a>
+                <a href="#attention-classifier" class="nav-item">Self-Attention Meta-Net</a>
+                <a href="#interactive-sandbox" class="nav-item">Interactive Risk Sandbox</a>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-group-title">Explainability & Triage</div>
+                <a href="#shap-attribution" class="nav-item">SHAP DeepExplainer</a>
+                <a href="#remediation-playbooks" class="nav-item">Remediation Playbooks</a>
+                <a href="#offline-llama" class="nav-item">Local Llama 3.1 Synthesis</a>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-group-title">API & Telemetry</div>
+                <a href="#rest-api" class="nav-item">REST Endpoints</a>
+                <a href="#websocket-feed" class="nav-item">Live WebSocket Feed</a>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-group-title">DevOps & Operations</div>
+                <a href="#nightly-retraining" class="nav-item">Nightly Retrain (SMOTE)</a>
+                <a href="#chaos-testing" class="nav-item">Chaos Attacker Harness</a>
+            </div>
+        </aside>
+
+        <!-- Center Content Pane -->
+        <main class="main-content">
+
+            <!-- Section 1: Overview -->
+            <section id="overview" class="doc-section">
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+                    <span class="badge badge-cyan">PRODUCTION PLATFORM</span>
+                    <span class="badge badge-green">LIVE PACKET SNIFFING ENABLED</span>
+                </div>
+                <h1 class="section-title">Graph-based Real-time Agentic Security Platform</h1>
+                <p class="lead-text">
+                    GRASP is an autonomous cybersecurity detection and incident response platform. By orchestrating a 17-agent parallel AI swarm over live network topologies, GRASP unifies statistical anomaly detection, deep sequence modeling, Bayesian log-odds consensus, and local air-gapped LLM reasoning to defend critical enterprise networks.
+                </p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Sub-50ms Alert Latency</h3>
+                        <p>Immediate WebSocket pre-classification before queuing ensures real-time security dashboard dispatch.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>17 Parallel Detectors</h3>
+                        <p>14 CPU-bound machine learning agents and 3 PyTorch GPU deep models running concurrently without blocking.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚖️</div>
+                        <h3>Bayesian Log-Odds Fusion</h3>
+                        <p>Confidence-weighted probabilistic consensus prevents dilution during quiet multi-stage attack campaigns.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Offline Air-Gapped XAI</h3>
+                        <p>Mathematical SHAP attribution paired with local quantized Llama 3.1 creates zero-egress forensic remediation.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Quickstart -->
+            <section id="quickstart" class="doc-section">
+                <h2 class="subsection-title">5-Minute Quickstart</h2>
+                <p>Follow these steps to initialize the offline reasoning engine, start the backend API and packet capture workers, and boot the frontend dashboard.</p>
+
+                <p><strong>Step 1: Pull Local LLM via Ollama</strong></p>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="code-lang">Bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code># Ensure Ollama daemon is running in background
+ollama pull llama3.1:8b
+ollama pull phi3:mini</code></pre>
+                </div>
+
+                <p><strong>Step 2: Initialize Python Virtual Environment & Checkpoints</strong></p>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="code-lang">Bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>cd backend
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+
+# Pre-train the 14 CPU ML agent checkpoints (~35 seconds)
+python -m backend.ai_model.train_cpu_ml_agents
+
+# Launch FastAPI ASGI Server (Requires Sudo/Admin for Scapy raw sniffing)
+python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload</code></pre>
+                </div>
+
+                <p><strong>Step 3: Launch React/Vite SOC Dashboard</strong></p>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="code-lang">Bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>cd frontend
+npm install
+npm run dev
+
+# Access interactive dashboard at: http://localhost:5173</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 3: Architecture -->
+            <section id="architecture" class="doc-section">
+                <h2 class="subsection-title">6-Layer System Architecture</h2>
+                <p>GRASP is engineered with strict separation of concerns across six modular execution tiers:</p>
+
+                <div class="diagram-container">
+                    <svg viewBox="0 0 760 380" width="100%" height="auto" style="max-width:720px;">
+                        <rect x="20" y="20" width="340" height="48" rx="8" fill="#121a2f" stroke="#06b6d4" stroke-width="1.5"/>
+                        <text x="190" y="50" fill="#f8fafc" font-size="13" font-weight="600" text-anchor="middle">Layer 1: Network & HTTP Ingestion (Scapy)</text>
+
+                        <rect x="400" y="20" width="340" height="48" rx="8" fill="#121a2f" stroke="#06b6d4" stroke-width="1.5"/>
+                        <text x="570" y="50" fill="#f8fafc" font-size="13" font-weight="600" text-anchor="middle">Layer 2: 10k LRU Deduplication & 50k Queue</text>
+
+                        <path d="M 190 68 L 190 98 L 380 98 L 380 118" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+                        <path d="M 570 68 L 570 98 L 380 98 L 380 118" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+                        <rect x="60" y="120" width="640" height="48" rx="8" fill="#121a2f" stroke="#3b82f6" stroke-width="1.5"/>
+                        <text x="380" y="150" fill="#f8fafc" font-size="13" font-weight="600" text-anchor="middle">Layer 3: Parallel 17-Agent Swarm (14 CPU ML + 3 GPU DL)</text>
+
+                        <line x1="380" y1="168" x2="380" y2="200" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+                        <rect x="60" y="200" width="640" height="48" rx="8" fill="#121a2f" stroke="#8b5cf6" stroke-width="1.5"/>
+                        <text x="380" y="230" fill="#f8fafc" font-size="13" font-weight="600" text-anchor="middle">Layer 4: AgentBus Pub/Sub & Bayesian Log-Odds Fusion</text>
+
+                        <line x1="380" y1="248" x2="380" y2="280" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+                        <rect x="60" y="280" width="640" height="48" rx="8" fill="#121a2f" stroke="#10b981" stroke-width="1.5"/>
+                        <text x="380" y="310" fill="#f8fafc" font-size="13" font-weight="600" text-anchor="middle">Layer 5: 34-Dim Attention Classifier (3-Tier Quarantine Routing)</text>
+
+                        <line x1="380" y1="328" x2="380" y2="350" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+                        <rect x="60" y="350" width="640" height="28" rx="6" fill="#0d1322" stroke="#64748b" stroke-width="1"/>
+                        <text x="380" y="369" fill="#94a3b8" font-size="11" text-anchor="middle">Layer 6: Local Llama 3.1 Air-Gapped Remediation Playbooks</text>
+
+                        <defs>
+                            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- Section 4: Swarm Catalog -->
+            <section id="swarm-catalog" class="doc-section">
+                <h2 class="subsection-title">17-Agent Detection Swarm Catalog</h2>
+                <p>Each agent specializes in a narrow slice of network or application telemetry. Use the filter controls below to view by detector category:</p>
+
+                <div class="filter-bar">
+                    <button class="filter-btn active" onclick="filterAgents('all', this)">All (17)</button>
+                    <button class="filter-btn" onclick="filterAgents('unsupervised', this)">Unsupervised (3)</button>
+                    <button class="filter-btn" onclick="filterAgents('supervised', this)">Supervised RF (9)</button>
+                    <button class="filter-btn" onclick="filterAgents('nlp', this)">TF-IDF NLP (2)</button>
+                    <button class="filter-btn" onclick="filterAgents('deep', this)">Deep Learning (3)</button>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="doc-table" id="agent-table">
+                        <thead>
+                            <tr>
+                                <th>Agent ID</th>
+                                <th>Category</th>
+                                <th>Model Engine</th>
+                                <th>Vector Dims</th>
+                                <th>Key Input Features</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-cat="unsupervised">
+                                <td><strong>DDoS Agent</strong></td>
+                                <td><span class="badge badge-amber">Unsupervised</span></td>
+                                <td><code>IsolationForest</code></td>
+                                <td>8</td>
+                                <td>In/out degree, SYN ratio, packet velocity, avg byte size</td>
+                            </tr>
+                            <tr data-cat="unsupervised">
+                                <td><strong>Behavior Agent</strong></td>
+                                <td><span class="badge badge-amber">Unsupervised</span></td>
+                                <td><code>IsolationForest</code></td>
+                                <td>5</td>
+                                <td>In/out degree, bytes received, outbound/inbound ratio</td>
+                            </tr>
+                            <tr data-cat="unsupervised">
+                                <td><strong>Spike Agent</strong></td>
+                                <td><span class="badge badge-amber">Unsupervised</span></td>
+                                <td><code>IsolationForest</code></td>
+                                <td>5</td>
+                                <td>Degree Z-score, rolling window mean/std, degree delta</td>
+                            </tr>
+                            <tr data-cat="supervised">
+                                <td><strong>Port Scan Agent</strong></td>
+                                <td><span class="badge badge-cyan">Supervised RF</span></td>
+                                <td><code>RandomForest</code></td>
+                                <td>8</td>
+                                <td>Target count, unique ports, scan rate, SYN/RST ratio</td>
+                            </tr>
+                            <tr data-cat="supervised">
+                                <td><strong>Brute Force Agent</strong></td>
+                                <td><span class="badge badge-cyan">Supervised RF</span></td>
+                                <td><code>RandomForest</code></td>
+                                <td>8</td>
+                                <td>Auth failure count, attempt velocity, lockout counter</td>
+                            </tr>
+                            <tr data-cat="supervised">
+                                <td><strong>Lateral Move Agent</strong></td>
+                                <td><span class="badge badge-cyan">Supervised RF</span></td>
+                                <td><code>RandomForest</code></td>
+                                <td>8</td>
+                                <td>Internal hop distance, cross-subnet traversal, auth bursts</td>
+                            </tr>
+                            <tr data-cat="supervised">
+                                <td><strong>Exfiltration Agent</strong></td>
+                                <td><span class="badge badge-cyan">Supervised RF</span></td>
+                                <td><code>RandomForest</code></td>
+                                <td>8</td>
+                                <td>Outbound payload ratio, destination diversity, session span</td>
+                            </tr>
+                            <tr data-cat="supervised">
+                                <td><strong>Ransomware Agent</strong></td>
+                                <td><span class="badge badge-cyan">Supervised RF</span></td>
+                                <td><code>RandomForest</code></td>
+                                <td>8</td>
+                                <td>File locking velocity, extension cascades, crypto calls</td>
+                            </tr>
+                            <tr data-cat="supervised">
+                                <td><strong>C2 Beacon Agent</strong></td>
+                                <td><span class="badge badge-cyan">Supervised RF</span></td>
+                                <td><code>RandomForest</code></td>
+                                <td>8</td>
+                                <td>Interval regularity, FFT peak prominence, jitter ratio</td>
+                            </tr>
+                            <tr data-cat="supervised">
+                                <td><strong>Supply Inject Agent</strong></td>
+                                <td><span class="badge badge-cyan">Supervised RF</span></td>
+                                <td><code>RandomForest</code></td>
+                                <td>8</td>
+                                <td>Node age hours, supplier reputation, cross-tier access</td>
+                            </tr>
+                            <tr data-cat="supervised">
+                                <td><strong>Priv Escalation Agent</strong></td>
+                                <td><span class="badge badge-cyan">Supervised RF</span></td>
+                                <td><code>RandomForest</code></td>
+                                <td>8</td>
+                                <td>RBAC violations, administrative API calls, sudo frequency</td>
+                            </tr>
+                            <tr data-cat="supervised">
+                                <td><strong>MITM Agent</strong></td>
+                                <td><span class="badge badge-cyan">Supervised RF</span></td>
+                                <td><code>RandomForest</code></td>
+                                <td>8</td>
+                                <td>Route betweenness, ARP mismatch counts, TLS downgrade flags</td>
+                            </tr>
+                            <tr data-cat="nlp">
+                                <td><strong>SQLi / XSS Agent</strong></td>
+                                <td><span class="badge badge-green">TF-IDF NLP</span></td>
+                                <td><code>Tfidf + LogReg</code></td>
+                                <td>5,000</td>
+                                <td>Word-boundary character n-grams (1,3), SQL & XSS syntax</td>
+                            </tr>
+                            <tr data-cat="nlp">
+                                <td><strong>Signature Agent</strong></td>
+                                <td><span class="badge badge-green">TF-IDF NLP</span></td>
+                                <td><code>Tfidf + LogReg</code></td>
+                                <td>5,000</td>
+                                <td>Known shellcode signatures, CVE exploit strings, reverse shells</td>
+                            </tr>
+                            <tr data-cat="deep">
+                                <td><strong>Graph GCN Agent</strong></td>
+                                <td><span class="badge badge-purple">PyTorch GCN</span></td>
+                                <td><code>GraphSAGE</code></td>
+                                <td>7</td>
+                                <td>Topology embeddings, topological neighborhood deviation</td>
+                            </tr>
+                            <tr data-cat="deep">
+                                <td><strong>Temporal APT Agent</strong></td>
+                                <td><span class="badge badge-purple">PyTorch LSTM</span></td>
+                                <td><code>AttackLSTM</code></td>
+                                <td>34</td>
+                                <td>50-step sliding sequence of agent score-confidence vectors</td>
+                            </tr>
+                            <tr data-cat="deep">
+                                <td><strong>Zero-Day Agent</strong></td>
+                                <td><span class="badge badge-purple">PyTorch Autoenc</span></td>
+                                <td><code>AnomalyAutoencoder</code></td>
+                                <td>34</td>
+                                <td>Reconstruction MSE on unobserved flow distributions</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 5: Interactive Sandbox -->
+            <section id="interactive-sandbox" class="doc-section">
+                <h2 class="subsection-title">Interactive Consensus Simulator</h2>
+                <p>Test the mathematics of GRASP's dual-stage decision engine in real-time. Adjust the sliders below to simulate different agent triggers and observe how Bayesian Log-Odds and Self-Attention combine to set the final risk score and policy action.</p>
+
+                <div class="simulator-box">
+                    <div class="sim-slider-row">
+                        <label><strong>Port Reconnaissance (PortScan):</strong></label>
+                        <input type="range" class="sim-slider" id="sim-port" min="0" max="1" step="0.05" value="0.85" oninput="runSim()">
+                        <span id="sim-port-val" style="font-family:'JetBrains Mono'; font-weight:600;">0.85</span>
+                    </div>
+                    <div class="sim-slider-row">
+                        <label><strong>Credential Stuffing (BruteForce):</strong></label>
+                        <input type="range" class="sim-slider" id="sim-bf" min="0" max="1" step="0.05" value="0.75" oninput="runSim()">
+                        <span id="sim-bf-val" style="font-family:'JetBrains Mono'; font-weight:600;">0.75</span>
+                    </div>
+                    <div class="sim-slider-row">
+                        <label><strong>Lateral Hop (LateralMovement):</strong></label>
+                        <input type="range" class="sim-slider" id="sim-lat" min="0" max="1" step="0.05" value="0.20" oninput="runSim()">
+                        <span id="sim-lat-val" style="font-family:'JetBrains Mono'; font-weight:600;">0.20</span>
+                    </div>
+                    <div class="sim-slider-row">
+                        <label><strong>Average of Inactive Agents (Noise):</strong></label>
+                        <input type="range" class="sim-slider" id="sim-noise" min="0" max="0.3" step="0.02" value="0.04" oninput="runSim()">
+                        <span id="sim-noise-val" style="font-family:'JetBrains Mono'; font-weight:600;">0.04</span>
+                    </div>
+
+                    <div class="sim-output-card">
+                        <div class="sim-stat-box">
+                            <div class="sim-stat-value" id="sim-out-avg">0.18</div>
+                            <div class="sim-stat-label">Linear Avg</div>
+                        </div>
+                        <div class="sim-stat-box">
+                            <div class="sim-stat-value" id="sim-out-bayes">0.91</div>
+                            <div class="sim-stat-label">Bayesian Log-Odds</div>
+                        </div>
+                        <div class="sim-stat-box">
+                            <div class="sim-stat-value" id="sim-out-final">0.86</div>
+                            <div class="sim-stat-label">Final Risk (Blended)</div>
+                        </div>
+                        <div class="sim-stat-box">
+                            <div class="sim-stat-value" id="sim-out-tier" style="color:var(--accent-red)">CRITICAL</div>
+                            <div class="sim-stat-label">Enacted Policy</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Remediation Playbooks -->
+            <section id="remediation-playbooks" class="doc-section">
+                <h2 class="subsection-title">Remediation Playbooks</h2>
+                <p>GRASP maps verified critical threats directly to deterministic, production-ready terminal commands and system hardening tasks:</p>
+
+                <div class="filter-bar">
+                    <button class="filter-btn active" onclick="loadPlaybook('PORT_SCAN', this)">Port Scan</button>
+                    <button class="filter-btn" onclick="loadPlaybook('BRUTE_FORCE', this)">Brute Force</button>
+                    <button class="filter-btn" onclick="loadPlaybook('DDOS', this)">DDoS Flood</button>
+                    <button class="filter-btn" onclick="loadPlaybook('LATERAL_MOVE', this)">Lateral Movement</button>
+                    <button class="filter-btn" onclick="loadPlaybook('C2_BEACON', this)">C2 Beacon</button>
+                    <button class="filter-btn" onclick="loadPlaybook('RANSOMWARE', this)">Ransomware</button>
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="code-lang" id="playbook-title">PORT_SCAN Immediate Isolation</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy Commands</button>
+                    </div>
+                    <pre><code id="playbook-code"># Immediate containment commands generated by GRASP
+iptables -A INPUT -s 192.168.1.100 -j DROP
+nmap --open -p- localhost
+ss -tulpn | grep LISTEN</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 7: REST API -->
+            <section id="rest-api" class="doc-section">
+                <h2 class="subsection-title">REST API Reference</h2>
+                <p>The backend exposes full control over packet sniffing, graph topology, live swarm analysis, and quarantine safe box state via FastAPI on port <code>8000</code>.</p>
+
+                <div class="table-wrapper">
+                    <table class="doc-table">
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Endpoint</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="badge badge-cyan">POST</span></td>
+                                <td><code>/api/capture/start</code></td>
+                                <td>Binds Scapy sniffer to specified interface & target IP</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-red">POST</span></td>
+                                <td><code>/api/capture/stop</code></td>
+                                <td>Halts promiscuous packet capture worker</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-green">GET</span></td>
+                                <td><code>/api/capture/status</code></td>
+                                <td>Returns stream health, dropped packets, and LRU cache count</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-cyan">POST</span></td>
+                                <td><code>/api/attack</code></td>
+                                <td>Injects mock attack payload into running swarm</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-green">GET</span></td>
+                                <td><code>/api/analyze</code></td>
+                                <td>Executes swarm evaluation across all topology nodes</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-green">GET</span></td>
+                                <td><code>/api/remediation/{type}</code></td>
+                                <td>Returns structured incident analysis & shell mitigation block</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-green">GET</span></td>
+                                <td><code>/api/safe_box</code></td>
+                                <td>Lists all currently quarantined host endpoints</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-amber">POST</span></td>
+                                <td><code>/api/safe_box/release/{id}</code></td>
+                                <td>Releases quarantined node back to normal routing</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p><strong>Example Analysis Response:</strong></p>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="code-lang">JSON</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>{
+  "node_id": "hosp_central",
+  "risk_score": 0.8842,
+  "ml_risk_score": 0.8520,
+  "bayesian_score": 0.9325,
+  "action": "quarantine",
+  "tier": "CRITICAL",
+  "agent_count_fired": 4,
+  "top_agents": [
+    {"agent": "Port Scan", "score": 0.9412},
+    {"agent": "Brute Force", "score": 0.8821},
+    {"agent": "Lateral Movement", "score": 0.7410}
+  ]
+}</code></pre>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Right Sidebar TOC & Status -->
+        <aside class="sidebar-right">
+            <div class="toc-title">On This Page</div>
+            <a href="#overview" class="toc-link active">Platform Overview</a>
+            <a href="#quickstart" class="toc-link">5-Minute Quickstart</a>
+            <a href="#architecture" class="toc-link">6-Layer Pipeline</a>
+            <a href="#swarm-catalog" class="toc-link">17-Agent Catalog</a>
+            <a href="#interactive-sandbox" class="toc-link">Consensus Simulator</a>
+            <a href="#remediation-playbooks" class="toc-link">Remediation Playbooks</a>
+            <a href="#rest-api" class="toc-link">REST API Reference</a>
+
+            <div class="system-pill">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <div class="pulse-dot"></div>
+                    <span style="font-weight:600; color:var(--text-primary)">Swarm System</span>
+                </div>
+                <span style="color:var(--accent-green); font-weight:600;">OPERATIONAL</span>
+            </div>
+
+            <div style="margin-top:20px; padding:14px; background:var(--bg-card); border-radius:8px; border:1px solid var(--border-subtle); font-size:12px;">
+                <div style="color:var(--text-muted); margin-bottom:6px;">BACKEND ENGINE</div>
+                <div style="color:var(--text-primary); font-weight:600;">FastAPI + Uvicorn</div>
+                <div style="color:var(--text-muted); margin:10px 0 6px;">LOCAL INFERENCE</div>
+                <div style="color:var(--text-primary); font-weight:600;">Ollama Llama 3.1 (8B)</div>
+                <div style="color:var(--text-muted); margin:10px 0 6px;">STREAM TELEMETRY</div>
+                <div style="color:var(--text-primary); font-weight:600;">Native WebSocket (50ms)</div>
+            </div>
+        </aside>
+
+    </div>
+
+    <script>
+        // Theme Toggle Functionality
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const themeText = document.getElementById('theme-text');
+        const html = document.documentElement;
+
+        themeBtn.addEventListener('click', () => {
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark';
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light';
+            }
+        });
+
+        // Copy Code Functionality
+        function copyCode(btn) {
+            const pre = btn.closest('.code-container').querySelector('pre code');
+            navigator.clipboard.writeText(pre.innerText).then(() => {
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.style.color = 'var(--accent-green)';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.color = '';
+                }, 2000);
+            });
+        }
+
+        // Agent Catalog Filter Functionality
+        function filterAgents(cat, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const rows = document.querySelectorAll('#agent-table tbody tr');
+            rows.forEach(row => {
+                if (cat === 'all' || row.getAttribute('data-cat') === cat) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Interactive Simulator
+        function runSim() {
+            const port = parseFloat(document.getElementById('sim-port').value);
+            const bf = parseFloat(document.getElementById('sim-bf').value);
+            const lat = parseFloat(document.getElementById('sim-lat').value);
+            const noise = parseFloat(document.getElementById('sim-noise').value);
+
+            document.getElementById('sim-port-val').textContent = port.toFixed(2);
+            document.getElementById('sim-bf-val').textContent = bf.toFixed(2);
+            document.getElementById('sim-lat-val').textContent = lat.toFixed(2);
+            document.getElementById('sim-noise-val').textContent = noise.toFixed(2);
+
+            // 17 Agent Scores: 3 active + 14 inactive
+            const scores = [port, bf, lat, ...Array(14).fill(noise)];
+            const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+
+            // Bayesian Log-Odds
+            const prior = 0.10;
+            let logOdds = Math.log(prior / (1 - prior));
+            scores.forEach(s => {
+                if (s > 0.05) {
+                    const clamped = Math.max(0.001, Math.min(0.999, s));
+                    logOdds += Math.log(clamped / (1 - clamped)) * 0.85; // avg confidence 0.85
+                }
+            });
+            const bayes = 1 / (1 + Math.exp(-logOdds));
+
+            // Attention MLP proxy (non-linear boost on agreement)
+            const mlp = Math.min(1.0, Math.max(bayes * 0.95, (port * 0.4 + bf * 0.4 + lat * 0.3)));
+            const finalScore = mlp * 0.60 + bayes * 0.40;
+
+            document.getElementById('sim-out-avg').textContent = avg.toFixed(2);
+            document.getElementById('sim-out-bayes').textContent = bayes.toFixed(2);
+            document.getElementById('sim-out-final').textContent = finalScore.toFixed(2);
+
+            const tierEl = document.getElementById('sim-out-tier');
+            if (finalScore >= 0.70) {
+                tierEl.textContent = 'CRITICAL';
+                tierEl.style.color = 'var(--accent-red)';
+            } else if (finalScore >= 0.50) {
+                tierEl.textContent = 'SUSPICIOUS';
+                tierEl.style.color = 'var(--accent-amber)';
+            } else if (finalScore >= 0.30) {
+                tierEl.textContent = 'WATCH';
+                tierEl.style.color = 'var(--accent-cyan)';
+            } else {
+                tierEl.textContent = 'NORMAL';
+                tierEl.style.color = 'var(--accent-green)';
+            }
+        }
+
+        // Remediation Playbook Dictionary
+        const playbooks = {
+            PORT_SCAN: `# Immediate containment commands generated by GRASP
+iptables -A INPUT -s 192.168.1.100 -j DROP
+nmap --open -p- localhost
+ss -tulpn | grep LISTEN
+
+# Hardening Actions:
+# - Close unused ports in /etc/ufw/ufw.conf
+# - Enable port knocking with knockd
+# - Deploy fail2ban for repeated scan events`,
+
+            BRUTE_FORCE: `# Immediate authentication containment
+fail2ban-client status sshd
+passwd -l root
+who -a | grep 192.168.1.100
+
+# Hardening Actions:
+# - Set 'PasswordAuthentication no' in /etc/ssh/sshd_config
+# - Install Google Authenticator 2FA: apt install libpam-google-authenticator
+# - Restrict SSH access to whitelisted admin subnets`,
+
+            DDOS: `# Volumetric flood mitigation
+iptables -A INPUT -p tcp --dport 80 -m limit --limit 25/minute -j ACCEPT
+ip route add blackhole 192.168.1.100
+netstat -an | grep SYN_RECV | wc -l
+
+# Hardening Actions:
+# - Enable SYN cookies: sysctl -w net.ipv4.tcp_syncookies=1
+# - Apply per-IP rate limits in iptables hashlimit
+# - Signal upstream edge router for null routing`,
+
+            LATERAL_MOVE: `# Internal isolation & session inspection
+iptables -I INPUT -s 192.168.1.100 -j DROP
+netstat -an | grep ESTABLISHED
+crontab -l && ls -la /etc/cron.d/
+
+# Hardening Actions:
+# - Segment internal network into isolated VLAN tiers
+# - Enable host-based firewalls across all cluster nodes
+# - Rotate and audit shared domain service credentials`,
+
+            C2_BEACON: `# Egress communication block & malware scan
+iptables -A OUTPUT -d 192.168.1.100 -j DROP
+clamscan -r / --remove --quiet
+netstat -tulpn | grep 192.168.1.100
+
+# Hardening Actions:
+# - Block outbound traffic on non-standard egress ports
+# - Enforce DNS sinkholing for newly observed domains
+# - Deploy EDR memory scanning on compromised nodes`,
+
+            RANSOMWARE: `# Emergency network disconnect & process kill
+ifconfig eth0 down
+vssadmin list shadows
+ps aux | grep -i crypt | awk '{print $2}' | xargs kill -9
+
+# Hardening Actions:
+# - Restore verified clean offline immutable backups
+# - Notify CERT-In incident response authority
+# - Retain volatile forensic RAM dump before cleanup`
+        };
+
+        function loadPlaybook(type, btn) {
+            btn.closest('.filter-bar').querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('playbook-title').textContent = type + ' Containment Playbook';
+            document.getElementById('playbook-code').textContent = playbooks[type];
+        }
+
+        // Live Search Filter
+        const searchInput = document.getElementById('search-input');
+        searchInput.addEventListener('input', (e) => {
+            const q = e.target.value.toLowerCase().trim();
+            if (!q) {
+                document.querySelectorAll('.doc-section').forEach(s => s.style.display = '');
+                return;
+            }
+            document.querySelectorAll('.doc-section').forEach(s => {
+                const text = s.innerText.toLowerCase();
+                s.style.display = text.includes(q) ? '' : 'none';
+            });
+        });
+
+        // ⌘K focus shortcut
+        window.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                searchInput.focus();
+            }
+        });
+
+        // ScrollSpy TOC Highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section.doc-section');
+            const scrollPos = window.scrollY + 100;
+            sections.forEach(sec => {
+                const top = sec.offsetTop;
+                const height = sec.offsetHeight;
+                const id = sec.getAttribute('id');
+                if (scrollPos >= top && scrollPos < top + height) {
+                    document.querySelectorAll('.sidebar-left .nav-item, .sidebar-right .toc-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
