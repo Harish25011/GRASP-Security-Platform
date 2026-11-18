@@ -1,6 +1,12 @@
 # GRASP Phase 2: Ultimate System
 
-Graph-based Real-time Agentic Security Platform — A 15-Agent Swarm with Multi-Head Attention, Scapy SNIFF, and Local Llama 3.1 LLM Explainability.
+Graph-based Real-time Agentic Security Platform — A 17-Agent Swarm with Multi-Head Attention, Scapy SNIFF, and Local Llama 3.1 LLM Explainability.
+
+## Live Documentation Portal
+Visit the live interactive documentation portal:  
+👉 **[https://harish25011.github.io/GRASP-Security-Platform/](https://harish25011.github.io/GRASP-Security-Platform/)**
+
+---
 
 ## M.Tech Thesis Defence: Live Demo Guide
 
